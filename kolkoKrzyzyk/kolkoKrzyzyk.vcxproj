@@ -121,7 +121,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="SplashState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AssetManager.hpp" />
+    <ClInclude Include="GameStateManager.hpp" />
+    <ClInclude Include="InputManager.hpp" />
+    <ClInclude Include="MainGame.hpp" />
+    <ClInclude Include="SplashState.hpp" />
+    <ClInclude Include="State.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
