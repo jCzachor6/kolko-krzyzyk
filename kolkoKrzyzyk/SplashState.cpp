@@ -1,7 +1,8 @@
 #include "SplashState.hpp"
 #include <sstream>
 #include <iostream>
-
+#include "MenuState.hpp"
+#include "PlayState.hpp"
 
 SplashState::SplashState(GameDataRef data)
 {
@@ -15,7 +16,7 @@ SplashState::~SplashState()
 
 void SplashState::Init()
 {
-	data->assetManager.LoadTexture("Splash_State_Background", "Resources/splashScreen.png");
+	data->assetManager.LoadTexture("Splash_State_Background", "Resources/SplashState/splashScreen.png");
 	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Splash_State_Background"));
 }
 
@@ -32,7 +33,7 @@ void SplashState::HandleInput()
 void SplashState::Update(float dt)
 {
 	if (clock.getElapsedTime().asSeconds() > 3.0) {
-		//todo
+		data->stateManager.AddState(StateRef(new MenuState(this->data)));
 	}
 }
 

@@ -45,6 +45,12 @@
     <ClCompile Include="SplashState.cpp">
       <Filter>Source Files\kolkoKrzyzyk</Filter>
     </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\kolkoKrzyzyk</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
+      <Filter>Source Files\kolkoKrzyzyk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.hpp">
@@ -63,6 +69,15 @@
       <Filter>Header Files\engine</Filter>
     </ClInclude>
     <ClInclude Include="SplashState.hpp">
+      <Filter>Header Files\kolkoKrzyzyk</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.hpp">
+      <Filter>Header Files\kolkoKrzyzyk</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayState.hpp">
+      <Filter>Header Files\kolkoKrzyzyk</Filter>
+    </ClInclude>
+    <ClInclude Include="DEFINITIONS.hpp">
       <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
   </ItemGroup>

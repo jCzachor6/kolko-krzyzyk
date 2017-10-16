@@ -1,14 +1,13 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "MainGame.hpp"
 
-
-class SplashState : public State
+class PlayState : public State
 {
 public:
-	SplashState(GameDataRef data);
-	~SplashState();
+	PlayState(GameDataRef data, int size);
 	void Init();
 	void HandleInput();
 	void Update(float dt);
@@ -16,6 +15,7 @@ public:
 
 private:
 	GameDataRef data;
+	int board_size;
 	sf::Clock clock;
 	sf::Sprite backgroundSprite;
 };
