@@ -6,15 +6,17 @@ PlayState::PlayState(GameDataRef data, int size)
 {
 	this->data = data;
 	this->board_size = size;
+	
 }
 
 void PlayState::Init()
 {
-	data->assetManager.LoadTexture("Menu_State_Background", "Resources/MenuState/menuScreen.png");
+	data->assetManager.LoadTexture("Menu_State_Background", "Resources/PlayState/playScreen.png");
 	data->assetManager.LoadTexture("tile_empty", "Resources/PlayState/empty.png");
 	data->assetManager.LoadTexture("tile_selected", "Resources/PlayState/selected.png");
 	data->assetManager.LoadTexture("tile_circle", "Resources/PlayState/circle.png");
 	data->assetManager.LoadTexture("tile_cross", "Resources/PlayState/cross.png");
+	board = new Board(this->data, this->board_size);
 	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Background"));
 }
 
@@ -36,5 +38,6 @@ void PlayState::Draw(float dt)
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
+	board->drawTiles();
 	data->renderWindow.display();
 }

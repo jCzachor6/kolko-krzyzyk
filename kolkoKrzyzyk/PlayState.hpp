@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "MainGame.hpp"
+#include "Board.hpp"
 
 class PlayState : public State
 {
@@ -18,5 +19,6 @@ private:
 	int board_size;
 	sf::Clock clock;
 	sf::Sprite backgroundSprite;
+	Board *board;
 };
 

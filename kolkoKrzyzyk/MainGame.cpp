@@ -37,10 +37,10 @@ void MainGame::Run()
 				->stateManager
 				.GetActiveState()
 				->Update(dt);
-
 			accumulator -= dt;
 		}
 		interpolation = accumulator / dt;
+		sf::sleep(sf::seconds(dt));
 		this->data->stateManager.GetActiveState()->Draw(interpolation);
 	}
 

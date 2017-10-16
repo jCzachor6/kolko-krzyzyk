@@ -1,5 +1,6 @@
 #include "MenuState.hpp"
 #include "DEFINITIONS.hpp"
+#include "PlayState.hpp"
 
 
 MenuState::MenuState(GameDataRef data)
@@ -67,6 +68,17 @@ void MenuState::HandleInput()
 			p15Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_15"));
 			p20Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_20sel"));
 			selectedSize = 20;
+		}
+
+		if (data->inputManager.IsSpriteClicked(twoSprite, sf::Mouse::Button::Left, data->renderWindow)) {
+			data->stateManager.AddState(StateRef(new PlayState(this->data, selectedSize)));
+		}
+		if (data->inputManager.IsSpriteClicked(oneSprite, sf::Mouse::Button::Left, data->renderWindow)) {
+			//TODO
+			//		data->stateManager.AddState(StateRef(new PlayBotState(this->data, selectedSize)));
+		}
+		if (data->inputManager.IsSpriteClicked(exitSprite, sf::Mouse::Button::Left, data->renderWindow)) {
+			data->renderWindow.close();
 		}
 
 

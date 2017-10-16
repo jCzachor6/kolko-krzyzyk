@@ -51,6 +51,9 @@
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files\kolkoKrzyzyk</Filter>
     </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Source Files\kolkoKrzyzyk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.hpp">
@@ -78,6 +81,9 @@
       <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
     <ClInclude Include="DEFINITIONS.hpp">
+      <Filter>Header Files\kolkoKrzyzyk</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.hpp">
       <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
   </ItemGroup>

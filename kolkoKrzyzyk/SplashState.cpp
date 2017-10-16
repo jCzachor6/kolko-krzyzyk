@@ -32,7 +32,7 @@ void SplashState::HandleInput()
 
 void SplashState::Update(float dt)
 {
-	if (clock.getElapsedTime().asSeconds() > 3.0) {
+	if (clock.getElapsedTime().asSeconds() > 1.5) {
 		data->stateManager.AddState(StateRef(new MenuState(this->data)));
 	}
 }
