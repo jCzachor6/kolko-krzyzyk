@@ -4,6 +4,7 @@
 MainGame::MainGame(int width, int height, std::string title)
 {
 	data->renderWindow.create(sf::VideoMode(width, height), title, sf::Style::Close|sf::Style::Titlebar);
+	data->renderWindow.setFramerateLimit(30);
 	data->stateManager.AddState(StateRef(new SplashState(this->data)));
 }
 
@@ -40,7 +41,6 @@ void MainGame::Run()
 			accumulator -= dt;
 		}
 		interpolation = accumulator / dt;
-		sf::sleep(sf::seconds(dt));
 		this->data->stateManager.GetActiveState()->Draw(interpolation);
 	}
 
