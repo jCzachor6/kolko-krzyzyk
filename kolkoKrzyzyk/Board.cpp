@@ -11,9 +11,18 @@ Board::Board(GameDataRef data, int size)
 
 void Board::drawTiles()
 {
-	for (int i = 0; i < tilesSprites.size(); i++) {
-		for (int j = 0; j < tilesSprites.size(); j++) {
-			data->renderWindow.draw(tilesSprites.at(i).at(j));
+	for (int i = 0; i < tilesVector.size(); i++) {
+		for (int j = 0; j < tilesVector.size(); j++) {
+			tilesVector.at(i).at(j).drawTile();
+		}
+	}
+}
+
+void Board::handleInput(bool *xTurn)
+{
+	for (int i = 0; i < tilesVector.size(); i++) {
+		for (int j = 0; j < tilesVector.size(); j++) {
+			tilesVector.at(i).at(j).handleInput(xTurn);
 		}
 	}
 }
@@ -23,13 +32,12 @@ void Board::setupBoard()
 	int initposX = (GAME_WIDTH / 2) - (32 * boardSize / 2);
 	int initposY = (GAME_HEIGHT / 2) - (32 * boardSize / 2);
 	for (int i = 0; i < boardSize; i++) {
-		std::vector<sf::Sprite> Xrow;
+		std::vector<tile> Xrow;
 		for (int j = 0; j < boardSize; j++) {
-			sf::Sprite tmp(data->assetManager.GetTextrure("tile_empty"));
-			tmp.setPosition(initposX + 32*j, initposY + 32 * i);
-			Xrow.push_back(tmp);
+			tile tmpTile(this->data, initposX + 32 * j, initposY + 32 * i);
+			Xrow.push_back(tmpTile);
 		}
-		tilesSprites.push_back(Xrow);
+		tilesVector.push_back(Xrow);
 	}
 }
 

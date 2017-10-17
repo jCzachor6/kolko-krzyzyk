@@ -19,6 +19,11 @@ private:
 	int board_size;
 	sf::Clock clock;
 	sf::Sprite backgroundSprite;
+	sf::Sprite circleSprite;
+	sf::Sprite crossSprite;
+	sf::Sprite arrowSprite;
+
 	Board *board;
+	bool xTurn;
 };
 
