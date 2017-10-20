@@ -1,5 +1,5 @@
 #include "PlayState.hpp"
-
+#include <iostream>
 
 
 PlayState::PlayState(GameDataRef data, int size)
@@ -7,6 +7,7 @@ PlayState::PlayState(GameDataRef data, int size)
 	this->data = data;
 	this->board_size = size;
 	this->xTurn = true;
+	this->isWin = false;
 }
 
 void PlayState::Init()
@@ -19,14 +20,16 @@ void PlayState::Init()
 	data->assetManager.LoadTexture("O", "Resources/PlayState/O.png");
 	data->assetManager.LoadTexture("X", "Resources/PlayState/X.png");
 	data->assetManager.LoadTexture("arrow", "Resources/PlayState/arrow.png");
-	board = new Board(this->data, this->board_size);
+
 	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Background"));
 	circleSprite.setTexture(this->data->assetManager.GetTextrure("O"));
 	crossSprite.setTexture(this->data->assetManager.GetTextrure("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTextrure("arrow"));
-	circleSprite.setPosition(40, 40);
-	crossSprite.setPosition(40 +circleSprite.getGlobalBounds().width, 40);
-	arrowSprite.setPosition(40 + circleSprite.getGlobalBounds().width, 40+circleSprite.getGlobalBounds().height);
+
+	board = new Board(this->data, this->board_size);
+
+	circleSprite.setPosition(40, 120);
+	crossSprite.setPosition(40 +circleSprite.getGlobalBounds().width, 120);
 }
 
 void PlayState::HandleInput()
@@ -43,10 +46,19 @@ void PlayState::HandleInput()
 void PlayState::Update(float dt)
 {
 	if (xTurn) {
-		arrowSprite.setPosition(40 + circleSprite.getGlobalBounds().width, 50 + circleSprite.getGlobalBounds().height);
+		arrowSprite.setPosition(40 + circleSprite.getGlobalBounds().width, 130 + circleSprite.getGlobalBounds().height);
+	}else {
+		arrowSprite.setPosition(40, 130 + circleSprite.getGlobalBounds().height);
+	}
+
+	if (isWin) {
+		if(xTurn)
+			std::cout << "O wygralo" << std::endl;
+		else std::cout << "X wygralo" << std::endl;
+		isWin = false;
 	}
 	else {
-		arrowSprite.setPosition(40, 50 + circleSprite.getGlobalBounds().height);
+		board->update(&isWin);
 	}
 }
 

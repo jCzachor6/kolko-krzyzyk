@@ -25,5 +25,6 @@ private:
 
 	Board *board;
 	bool xTurn;
+	bool isWin;
 };
 

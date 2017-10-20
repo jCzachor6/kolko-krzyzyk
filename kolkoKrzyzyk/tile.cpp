@@ -33,7 +33,7 @@ void tile::setState(char state)
 	}
 }
 
-void tile::handleInput(bool *xTurn)
+void tile::handleInput(bool *xTurn, bool *isChecked)
 {
 	if (isEmpty()) {
 		if (data->inputManager.IsMouseOnSprite(this->sprite, data->renderWindow)) {
@@ -42,9 +42,11 @@ void tile::handleInput(bool *xTurn)
 				if (*xTurn) {
 					setState('x');
 					*xTurn = false;
+					*isChecked = false;
 				}else {
 					setState('o');
 					*xTurn = true;
+					*isChecked = false;
 				}
 			}
 		}
@@ -57,6 +59,11 @@ void tile::handleInput(bool *xTurn)
 bool tile::isEmpty()
 {
 	return (this->state == 'e');
+}
+
+char tile::getState()
+{
+	return this->state;
 }
 
 
