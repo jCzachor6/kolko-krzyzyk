@@ -17,7 +17,7 @@ SplashState::~SplashState()
 void SplashState::Init()
 {
 	data->assetManager.LoadTexture("Splash_State_Background", "Resources/SplashState/splashScreen.png");
-	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Splash_State_Background"));
+	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Splash_State_Background"));
 }
 
 void SplashState::HandleInput()

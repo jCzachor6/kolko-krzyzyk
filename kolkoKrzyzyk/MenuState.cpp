@@ -9,6 +9,21 @@ MenuState::MenuState(GameDataRef data)
 	this->selectedSize = 10;
 	gridLayout = new  GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
 	gridLayout->setRows(12, 12);
+	boardSize = new Selector(this->data);
+}
+
+MenuState::~MenuState() {
+	delete gridLayout;
+	delete boardSize;
+	if (twoPlayers != NULL) {
+		delete twoPlayers;
+	}
+	if (onePlayer != NULL) {
+		delete onePlayer;
+	}
+	if (exitGame != NULL) {
+		delete exitGame;
+	}
 }
 
 void MenuState::Init()
@@ -27,16 +42,13 @@ void MenuState::Init()
 	data->assetManager.LoadTexture("Menu_State_15sel", "Resources/MenuState/15_sel.png");
 	data->assetManager.LoadTexture("Menu_State_20sel", "Resources/MenuState/20_sel.png");
 
-	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Background"));
-	p10Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_10sel"));
-	p15Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_15"));
-	p20Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_20"));
+	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Menu_State_Background"));
 
 	twoPlayers = new Button(this->data,
 		sf::Vector2i(gridLayout->getPosition(6, 5)),
 		"Menu_State_Two", "Menu_State_Twosel");
 	twoPlayers->setOnClick([&]() {
-	data->stateManager.AddState(StateRef(new PlayState(this->data, selectedSize)));
+		data->stateManager.AddState(StateRef(new PlayState(this->data, boardSize->getReturnValue())));
 	});
 	
 	onePlayer = new Button(this->data,
@@ -52,11 +64,11 @@ void MenuState::Init()
 	exitGame->setOnClick([&]() {
 		data->renderWindow.close();
 	});
-
-	//todo add 'rozmiar' sprite
-	p10Sprite.setPosition(gridLayout->getPosition(4, 3));
-	p15Sprite.setPosition(gridLayout->getPosition(6, 3));
-	p20Sprite.setPosition(gridLayout->getPosition(8, 3));
+	
+	boardSize->addItem(gridLayout->getPosition(4, 3), 10, "Menu_State_10", "Menu_State_10sel");
+	boardSize->addItem(gridLayout->getPosition(6, 3), 15, "Menu_State_15", "Menu_State_15sel");
+	boardSize->addItem(gridLayout->getPosition(8, 3), 20, "Menu_State_20", "Menu_State_20sel");
+	boardSize->setDefault();
 }
 
 void MenuState::HandleInput()
@@ -71,26 +83,7 @@ void MenuState::HandleInput()
 		twoPlayers->handleInput();
 		onePlayer->handleInput();
 		exitGame->handleInput();
-		
-
-		if (data->inputManager.IsSpriteClicked(p10Sprite, sf::Mouse::Button::Left, data->renderWindow)) {
-			p10Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_10sel"));
-			p15Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_15"));
-			p20Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_20"));
-			selectedSize = 10;
-		}
-		if (data->inputManager.IsSpriteClicked(p15Sprite, sf::Mouse::Button::Left, data->renderWindow)) {
-			p10Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_10"));
-			p15Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_15sel"));
-			p20Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_20"));
-			selectedSize = 15;
-		}
-		if (data->inputManager.IsSpriteClicked(p20Sprite, sf::Mouse::Button::Left, data->renderWindow)) {
-			p10Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_10"));
-			p15Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_15"));
-			p20Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_20sel"));
-			selectedSize = 20;
-		}
+		boardSize->handleInput();
 	}
 }
 
@@ -102,9 +95,7 @@ void MenuState::Draw(float dt)
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
-	data->renderWindow.draw(p10Sprite);
-	data->renderWindow.draw(p15Sprite);
-	data->renderWindow.draw(p20Sprite);
+	boardSize->draw();
 	twoPlayers->draw();
 	onePlayer->draw();
 	exitGame->draw();

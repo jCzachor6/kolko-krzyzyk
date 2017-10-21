@@ -3,7 +3,7 @@
 Button::Button(GameDataRef data, sf::Vector2i position, std::string notSelected, std::string selected)
 {
 	this->data = data;
-	this->sprite.setTexture(this->data->assetManager.GetTextrure(notSelected));
+	this->sprite.setTexture(this->data->assetManager.GetTexture(notSelected));
 	this->sprite.setPosition(position.x-this->sprite.getGlobalBounds().width/2, position.y);
 	this->notSelected = notSelected;
 	this->selected = selected;
@@ -20,11 +20,12 @@ void Button::handleInput()
 	if (data->inputManager.IsSpriteClicked(sprite, sf::Mouse::Button::Left, data->renderWindow)) {
 		this->onClick();
 	}
+
 	if (data->inputManager.IsMouseOnSprite(sprite, data->renderWindow)) {
-		sprite.setTexture(this->data->assetManager.GetTextrure(selected));
+		sprite.setTexture(this->data->assetManager.GetTexture(selected));
 	}
 	else {
-		sprite.setTexture(this->data->assetManager.GetTextrure(notSelected));
+		sprite.setTexture(this->data->assetManager.GetTexture(notSelected));
 	}
 }
 

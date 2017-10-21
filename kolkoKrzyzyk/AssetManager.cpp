@@ -8,7 +8,7 @@ void AssetManager::LoadTexture(std::string name, std::string fileName)
 	}
 }
 
-sf::Texture & AssetManager::GetTextrure(std::string name)
+sf::Texture & AssetManager::GetTexture(std::string name)
 {
 	return this->textures.at(name);
 }

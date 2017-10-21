@@ -15,6 +15,11 @@ bool InputManager::IsSpriteClicked(sf::Sprite object, sf::Mouse::Button button, 
 	return false;
 }
 
+bool InputManager::onMouseReleasedOnSprite(sf::Sprite object, sf::Mouse::Button button, sf::RenderWindow & window)
+{
+	return false;
+}
+
 bool InputManager::IsMouseOnSprite(sf::Sprite object, sf::RenderWindow & window)
 {
 	sf::IntRect tempRect(

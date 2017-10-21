@@ -4,11 +4,13 @@
 #include "MainGame.hpp"
 #include "Button.hpp"
 #include "GridLayout.hpp"
+#include "Selector.hpp"
 
 class MenuState : public State
 {
 public:
 	MenuState(GameDataRef data);
+	~MenuState();
 	void Init();
 	void HandleInput();
 	void Update(float dt);
@@ -23,5 +25,6 @@ private:
 	Button *twoPlayers;
 	Button *onePlayer;
 	Button *exitGame;
+	Selector *boardSize;
 };
 

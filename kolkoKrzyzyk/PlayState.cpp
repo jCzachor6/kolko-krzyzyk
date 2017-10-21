@@ -14,6 +14,17 @@ PlayState::PlayState(GameDataRef data, int size)
 	gridLayout->setRows(12, 36);
 }
 
+PlayState::~PlayState()
+{
+	delete gridLayout;
+	if (board != NULL) {
+		delete board;
+	}
+	if (menuButton != NULL) {
+		delete menuButton;
+	}
+}
+
 void PlayState::Init()
 {
 	data->assetManager.LoadTexture("Menu_State_Background", "Resources/PlayState/playScreen.png");
@@ -28,10 +39,10 @@ void PlayState::Init()
 	data->assetManager.LoadTexture("menu", "Resources/PlayState/menu.png");
 	data->assetManager.LoadTexture("menusel", "Resources/PlayState/menusel.png");
 
-	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Background"));
-	circleSprite.setTexture(this->data->assetManager.GetTextrure("O"));
-	crossSprite.setTexture(this->data->assetManager.GetTextrure("X"));
-	arrowSprite.setTexture(this->data->assetManager.GetTextrure("arrow"));
+	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Menu_State_Background"));
+	circleSprite.setTexture(this->data->assetManager.GetTexture("O"));
+	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
+	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
 	board = new Board(this->data, this->board_size);
 	menuButton = new Button(this->data,
@@ -60,13 +71,13 @@ void PlayState::HandleInput()
 void PlayState::Update(float dt)
 {
 	if (xTurn) {
-		arrowSprite.setPosition(gridLayout->getPosition(1, 3));
-	}else {
 		arrowSprite.setPosition(gridLayout->getPosition(4, 3));
+	}else {
+		arrowSprite.setPosition(gridLayout->getPosition(1, 3));
 	}
 
 	if (isWin) {
-		crownSprite.setTexture(this->data->assetManager.GetTextrure("crown"));
+		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
 		if (xTurn) {
 			std::cout << "O wygralo" << std::endl;
 			crownSprite.setPosition(gridLayout->getPosition(1, 1));

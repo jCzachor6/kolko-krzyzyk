@@ -8,7 +8,7 @@ public:
 	AssetManager() {};
 	~AssetManager() {};
 	void LoadTexture(std::string name, std::string fileName);
-	sf::Texture &GetTextrure(std::string name);
+	sf::Texture &GetTexture(std::string name);
 
 	void LoadFont(std::string name, std::string fileName);
 	sf::Font &GetFont(std::string name);
