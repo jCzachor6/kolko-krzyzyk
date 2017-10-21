@@ -1,6 +1,7 @@
 #include "PlayState.hpp"
 #include <iostream>
-
+#include "DEFINITIONS.hpp"
+#include "MenuState.hpp"
 
 PlayState::PlayState(GameDataRef data, int size)
 {
@@ -8,6 +9,9 @@ PlayState::PlayState(GameDataRef data, int size)
 	this->board_size = size;
 	this->xTurn = true;
 	this->isWin = false;
+	this->lockInput = false;
+	gridLayout = new GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
+	gridLayout->setRows(12, 36);
 }
 
 void PlayState::Init()
@@ -20,6 +24,9 @@ void PlayState::Init()
 	data->assetManager.LoadTexture("O", "Resources/PlayState/O.png");
 	data->assetManager.LoadTexture("X", "Resources/PlayState/X.png");
 	data->assetManager.LoadTexture("arrow", "Resources/PlayState/arrow.png");
+	data->assetManager.LoadTexture("crown", "Resources/PlayState/crown.png");
+	data->assetManager.LoadTexture("menu", "Resources/PlayState/menu.png");
+	data->assetManager.LoadTexture("menusel", "Resources/PlayState/menusel.png");
 
 	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Background"));
 	circleSprite.setTexture(this->data->assetManager.GetTextrure("O"));
@@ -27,9 +34,15 @@ void PlayState::Init()
 	arrowSprite.setTexture(this->data->assetManager.GetTextrure("arrow"));
 
 	board = new Board(this->data, this->board_size);
+	menuButton = new Button(this->data,
+		sf::Vector2i(gridLayout->getPosition(33, 10)),
+		"menu", "menusel");
+	menuButton->setOnClick([&]() {
+		data->stateManager.AddState(StateRef(new MenuState(this->data)));
+	});
 
-	circleSprite.setPosition(40, 120);
-	crossSprite.setPosition(40 +circleSprite.getGlobalBounds().width, 120);
+	circleSprite.setPosition(gridLayout->getPosition(1, 2));
+	crossSprite.setPosition(gridLayout->getPosition(4, 2));
 }
 
 void PlayState::HandleInput()
@@ -39,25 +52,31 @@ void PlayState::HandleInput()
 		if (sf::Event::Closed == event.type) {
 			data->renderWindow.close();
 		}
-		board->handleInput(&xTurn);
+		menuButton->handleInput();
+		if(!lockInput) board->handleInput(&xTurn);
 	}
 }
 
 void PlayState::Update(float dt)
 {
 	if (xTurn) {
-		arrowSprite.setPosition(40 + circleSprite.getGlobalBounds().width, 130 + circleSprite.getGlobalBounds().height);
+		arrowSprite.setPosition(gridLayout->getPosition(1, 3));
 	}else {
-		arrowSprite.setPosition(40, 130 + circleSprite.getGlobalBounds().height);
+		arrowSprite.setPosition(gridLayout->getPosition(4, 3));
 	}
 
 	if (isWin) {
-		if(xTurn)
+		crownSprite.setTexture(this->data->assetManager.GetTextrure("crown"));
+		if (xTurn) {
 			std::cout << "O wygralo" << std::endl;
-		else std::cout << "X wygralo" << std::endl;
+			crownSprite.setPosition(gridLayout->getPosition(1, 1));
+		} else {
+			std::cout << "X wygralo" << std::endl;
+			crownSprite.setPosition(gridLayout->getPosition(4, 1));
+		}
+		lockInput = true;
 		isWin = false;
-	}
-	else {
+	}else {
 		board->update(&isWin);
 	}
 }
@@ -69,6 +88,8 @@ void PlayState::Draw(float dt)
 	data->renderWindow.draw(circleSprite);
 	data->renderWindow.draw(crossSprite);
 	data->renderWindow.draw(arrowSprite);
+	data->renderWindow.draw(crownSprite);
 	board->drawTiles();
+	menuButton->draw();
 	data->renderWindow.display();
 }

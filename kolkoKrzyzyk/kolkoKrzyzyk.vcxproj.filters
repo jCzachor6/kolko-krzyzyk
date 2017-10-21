@@ -60,6 +60,9 @@
     <ClCompile Include="GridLayout.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.hpp">
@@ -96,6 +99,9 @@
       <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
     <ClInclude Include="GridLayout.hpp">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.hpp">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>

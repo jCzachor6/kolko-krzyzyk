@@ -7,7 +7,8 @@ MenuState::MenuState(GameDataRef data)
 {
 	this->data = data;
 	this->selectedSize = 10;
-	sf::Vector2i pos((GAME_WIDTH / 2) - p10Sprite.getGlobalBounds().width - 15, 50);
+	gridLayout = new  GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
+	gridLayout->setRows(12, 12);
 }
 
 void MenuState::Init()
@@ -27,19 +28,35 @@ void MenuState::Init()
 	data->assetManager.LoadTexture("Menu_State_20sel", "Resources/MenuState/20_sel.png");
 
 	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Background"));
-	twoSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Two"));
-	oneSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_One"));
-	exitSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Exit"));
 	p10Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_10sel"));
 	p15Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_15"));
 	p20Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_20"));
 
-	twoSprite.setPosition((GAME_WIDTH / 2) - twoSprite.getGlobalBounds().width/ 2, 350);
-	oneSprite.setPosition((GAME_WIDTH / 2) - oneSprite.getGlobalBounds().width / 2, 470);
-	exitSprite.setPosition((GAME_WIDTH / 2) - exitSprite.getGlobalBounds().width / 2, 590);
-	p10Sprite.setPosition((GAME_WIDTH / 2) - p10Sprite.getGlobalBounds().width - 15, 185);
-	p15Sprite.setPosition((GAME_WIDTH / 2), 185);
-	p20Sprite.setPosition((GAME_WIDTH / 2) + p10Sprite.getGlobalBounds().width + 15, 185);
+	twoPlayers = new Button(this->data,
+		sf::Vector2i(gridLayout->getPosition(6, 5)),
+		"Menu_State_Two", "Menu_State_Twosel");
+	twoPlayers->setOnClick([&]() {
+	data->stateManager.AddState(StateRef(new PlayState(this->data, selectedSize)));
+	});
+	
+	onePlayer = new Button(this->data,
+		sf::Vector2i(gridLayout->getPosition(6, 7)),
+		"Menu_State_One", "Menu_State_Onesel");
+	onePlayer->setOnClick([&]() {
+		//data->stateManager.AddState(StateRef(new PlayBotState(this->data, selectedSize)));
+	});
+
+	exitGame = new Button(this->data,
+		sf::Vector2i(gridLayout->getPosition(6, 9)),
+		"Menu_State_Exit", "Menu_State_Exitsel");
+	exitGame->setOnClick([&]() {
+		data->renderWindow.close();
+	});
+
+	//todo add 'rozmiar' sprite
+	p10Sprite.setPosition(gridLayout->getPosition(4, 3));
+	p15Sprite.setPosition(gridLayout->getPosition(6, 3));
+	p20Sprite.setPosition(gridLayout->getPosition(8, 3));
 }
 
 void MenuState::HandleInput()
@@ -50,6 +67,11 @@ void MenuState::HandleInput()
 		if (sf::Event::Closed == event.type) {
 			data->renderWindow.close();
 		}
+
+		twoPlayers->handleInput();
+		onePlayer->handleInput();
+		exitGame->handleInput();
+		
 
 		if (data->inputManager.IsSpriteClicked(p10Sprite, sf::Mouse::Button::Left, data->renderWindow)) {
 			p10Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_10sel"));
@@ -69,36 +91,6 @@ void MenuState::HandleInput()
 			p20Sprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_20sel"));
 			selectedSize = 20;
 		}
-
-		if (data->inputManager.IsSpriteClicked(twoSprite, sf::Mouse::Button::Left, data->renderWindow)) {
-			data->stateManager.AddState(StateRef(new PlayState(this->data, selectedSize)));
-		}
-		if (data->inputManager.IsSpriteClicked(oneSprite, sf::Mouse::Button::Left, data->renderWindow)) {
-			//TODO
-			//		data->stateManager.AddState(StateRef(new PlayBotState(this->data, selectedSize)));
-		}
-		if (data->inputManager.IsSpriteClicked(exitSprite, sf::Mouse::Button::Left, data->renderWindow)) {
-			data->renderWindow.close();
-		}
-
-
-		if (data->inputManager.IsMouseOnSprite(twoSprite, data->renderWindow)) {
-			twoSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Twosel"));
-		}else{
-			twoSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Two"));
-		}
-
-		if (data->inputManager.IsMouseOnSprite(oneSprite, data->renderWindow)) {
-			oneSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Onesel"));
-		}else {
-			oneSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_One"));
-		}
-
-		if (data->inputManager.IsMouseOnSprite(exitSprite, data->renderWindow)) {
-			exitSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Exitsel"));
-		}else {
-			exitSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Exit"));
-		}
 	}
 }
 
@@ -110,12 +102,12 @@ void MenuState::Draw(float dt)
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
-	data->renderWindow.draw(twoSprite);
-	data->renderWindow.draw(oneSprite);
-	data->renderWindow.draw(exitSprite);
 	data->renderWindow.draw(p10Sprite);
 	data->renderWindow.draw(p15Sprite);
 	data->renderWindow.draw(p20Sprite);
+	twoPlayers->draw();
+	onePlayer->draw();
+	exitGame->draw();
 	data->renderWindow.display();
 }
 

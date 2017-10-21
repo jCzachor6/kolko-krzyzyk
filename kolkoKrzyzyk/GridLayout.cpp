@@ -21,10 +21,10 @@ void GridLayout::setRows(int horizontalRows, int verticalRows)
 	}else throw std::invalid_argument("GridLayout received negative value");
 }
 
-sf::Vector2i GridLayout::getPosition(int vertRow, int horRow)
+sf::Vector2f GridLayout::getPosition(int vertRow, int horRow)
 {
 	int widthX = (endX - startX) / verticalRows;
 	int widthY = (endY - startY) / horizontalRows;
-	return sf::Vector2i(startX + widthX * vertRow, startY + widthY * horRow);
+	return sf::Vector2f(startX + widthX * vertRow, startY + widthY * horRow);
 }
 
