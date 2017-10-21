@@ -123,7 +123,9 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="GridLayout.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
@@ -135,8 +137,10 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="Board.hpp" />
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="DEFINITIONS.hpp" />
     <ClInclude Include="GameStateManager.hpp" />
+    <ClInclude Include="GridLayout.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="MainGame.hpp" />
     <ClInclude Include="MenuState.hpp" />

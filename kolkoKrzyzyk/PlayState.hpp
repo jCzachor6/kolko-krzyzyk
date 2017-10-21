@@ -4,6 +4,8 @@
 #include "State.hpp"
 #include "MainGame.hpp"
 #include "Board.hpp"
+#include "GridLayout.hpp"
+#include "Button.hpp"
 
 class PlayState : public State
 {
@@ -22,8 +24,14 @@ private:
 	sf::Sprite circleSprite;
 	sf::Sprite crossSprite;
 	sf::Sprite arrowSprite;
+	sf::Sprite crownSprite;
 
+	GridLayout *gridLayout;
 	Board *board;
+	Button *menuButton;
+
 	bool xTurn;
+	bool isWin;
+	bool lockInput;
 };
 

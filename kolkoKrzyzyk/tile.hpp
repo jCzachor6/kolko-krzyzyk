@@ -10,8 +10,9 @@ public:
 	tile(GameDataRef data, int x, int y);
 	void drawTile();
 	void setState(char state);
-	void handleInput(bool *xTurn);
+	void handleInput(bool *xTurn, bool *isChecked);
 	bool isEmpty();
+	char getState();
 private:
 	GameDataRef data;
 	sf::Sprite sprite;

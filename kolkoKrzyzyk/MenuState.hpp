@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "MainGame.hpp"
+#include "Button.hpp"
+#include "GridLayout.hpp"
 
 class MenuState : public State
 {
@@ -17,6 +19,9 @@ private:
 	GameDataRef data;
 	sf::Sprite backgroundSprite;
 	sf::Sprite p10Sprite, p15Sprite, p20Sprite;
-	sf::Sprite twoSprite, oneSprite, exitSprite;
+	GridLayout *gridLayout;
+	Button *twoPlayers;
+	Button *onePlayer;
+	Button *exitGame;
 };
 
