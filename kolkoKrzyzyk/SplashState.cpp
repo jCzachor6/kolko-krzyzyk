@@ -3,6 +3,7 @@
 #include <iostream>
 #include "MenuState.hpp"
 #include "PlayState.hpp"
+#include "DEFINITIONS.hpp"
 
 SplashState::SplashState(GameDataRef data)
 {
@@ -14,6 +15,8 @@ void SplashState::Init()
 {
 	data->assetManager.LoadTexture("Splash_State_Background", "Resources/SplashState/splashScreen.png");
 	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Splash_State_Background"));
+	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
+	backgroundSprite.setScale(newScale);
 }
 
 void SplashState::HandleInput()

@@ -29,6 +29,8 @@ void MenuState::Init()
 	data->assetManager.LoadTexture("Menu_State_20sel", "Resources/MenuState/20_sel.png");
 
 	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Menu_State_Background"));
+	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
+	backgroundSprite.setScale(newScale);
 
 	twoPlayers = new Button(this->data,
 		sf::Vector2i(gridLayout->getPosition(6, 5)),

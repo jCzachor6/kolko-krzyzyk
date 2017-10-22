@@ -29,6 +29,9 @@ void PlayState::Init()
 	data->assetManager.LoadTexture("menusel", "Resources/PlayState/menusel.png");
 
 	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Play_State_Background"));
+	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
+	backgroundSprite.setScale(newScale);
+
 	circleSprite.setTexture(this->data->assetManager.GetTexture("O"));
 	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
