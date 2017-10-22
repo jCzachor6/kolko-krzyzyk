@@ -23,14 +23,6 @@ void MainGame::Run()
 
 	while (this->data->renderWindow.isOpen()) {
 		this->data->stateManager.ProcessStateChanges();
-		newTime = this->clock.getElapsedTime().asSeconds();
-		frameTime = newTime - currentTime;
-		if (frameTime > 0.25f) {
-			frameTime = 0.25f;
-		}
-		currentTime = newTime;
-		accumulator += frameTime;
-		while (accumulator >= dt) {
 			this->data
 				->stateManager
 				.GetActiveState()
@@ -38,11 +30,11 @@ void MainGame::Run()
 			this->data
 				->stateManager
 				.GetActiveState()
-				->Update(dt);
-			accumulator -= dt;
-		}
-		interpolation = accumulator / dt;
-		this->data->stateManager.GetActiveState()->Draw(interpolation);
+				->Update();
+			this->data
+				->stateManager
+				.GetActiveState()
+				->Draw();
 	}
 
 }

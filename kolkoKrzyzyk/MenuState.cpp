@@ -73,11 +73,11 @@ void MenuState::HandleInput()
 	}
 }
 
-void MenuState::Update(float dt)
+void MenuState::Update()
 {
 }
 
-void MenuState::Draw(float dt)
+void MenuState::Draw()
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);

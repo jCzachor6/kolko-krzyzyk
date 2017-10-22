@@ -13,8 +13,8 @@ public:
 	PlayState(GameDataRef data, int size);
 	void Init();
 	void HandleInput();
-	void Update(float dt);
-	void Draw(float dt);
+	void Update();
+	void Draw();
 	void Remove();
 
 private:

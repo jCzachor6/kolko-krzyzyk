@@ -58,7 +58,7 @@ void PlayState::HandleInput()
 	}
 }
 
-void PlayState::Update(float dt)
+void PlayState::Update()
 {
 	if (xTurn) {
 		arrowSprite.setPosition(gridLayout->getPosition(4, 3));
@@ -82,7 +82,7 @@ void PlayState::Update(float dt)
 	}
 }
 
-void PlayState::Draw(float dt)
+void PlayState::Draw()
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);

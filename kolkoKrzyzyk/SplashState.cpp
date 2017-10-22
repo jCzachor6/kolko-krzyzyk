@@ -26,14 +26,14 @@ void SplashState::HandleInput()
 	}
 }
 
-void SplashState::Update(float dt)
+void SplashState::Update()
 {
 	if (clock.getElapsedTime().asSeconds() > 1.5) {
 		data->stateManager.AddState(StateRef(new MenuState(this->data)));
 	}
 }
 
-void SplashState::Draw(float dt)
+void SplashState::Draw()
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
