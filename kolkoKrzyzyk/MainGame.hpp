@@ -6,7 +6,7 @@
 #include "AssetManager.hpp"
 #include "InputManager.hpp"
 
-typedef std::shared_ptr<GameData> GameDataRef;
+
 
 struct GameData {
 	GameStateManager stateManager;
@@ -15,6 +15,7 @@ struct GameData {
 	InputManager inputManager;
 };
 
+typedef std::shared_ptr<GameData> GameDataRef;
 class MainGame
 {
 public:

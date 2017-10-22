@@ -34,7 +34,8 @@ void PlayState::Init()
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
 	board = new Board(this->data, this->board_size);
-	menuButton = new Button(this->data,
+	menuButton = new Button(
+		this->data,
 		sf::Vector2i(gridLayout->getPosition(33, 10)),
 		"menu", "menusel");
 	menuButton->setOnClick([&]() {
@@ -68,10 +69,8 @@ void PlayState::Update()
 	if (isWin) {
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
 		if (xTurn) {
-			std::cout << "O wygralo" << std::endl;
 			crownSprite.setPosition(gridLayout->getPosition(1, 1));
 		} else {
-			std::cout << "X wygralo" << std::endl;
 			crownSprite.setPosition(gridLayout->getPosition(4, 1));
 		}
 		lockInput = true;
