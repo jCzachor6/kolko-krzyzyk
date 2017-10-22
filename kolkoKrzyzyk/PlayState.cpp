@@ -14,7 +14,6 @@ PlayState::PlayState(GameDataRef data, int size)
 	gridLayout->setRows(12, 36);
 }
 
-
 void PlayState::Init()
 {
 	data->assetManager.LoadTexture("Play_State_Background", "Resources/PlayState/playScreen.png");
