@@ -23,8 +23,7 @@ void Button::handleInput()
 
 	if (data->inputManager.IsMouseOnSprite(sprite, data->renderWindow)) {
 		sprite.setTexture(this->data->assetManager.GetTexture(selected));
-	}
-	else {
+	}else {
 		sprite.setTexture(this->data->assetManager.GetTexture(notSelected));
 	}
 }

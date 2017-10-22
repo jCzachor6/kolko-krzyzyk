@@ -102,10 +102,18 @@ void MenuState::Remove()
 		delete exitGame;
 	}
 	data->assetManager.RemoveTexture({ 
-		"Menu_State_Background", "Menu_State_Two" , "Menu_State_One", 
-		"Menu_State_Exit", "Menu_State_Twosel" , "Menu_State_Onesel", 
-		"Menu_State_Exitsel", "Menu_State_10" , "Menu_State_15", 
-		"Menu_State_20", "Menu_State_10sel" , "Menu_State_15sel", 
+		"Menu_State_Background", 
+		"Menu_State_Two" , 
+		"Menu_State_One", 
+		"Menu_State_Exit", 
+		"Menu_State_Twosel" , 
+		"Menu_State_Onesel", 
+		"Menu_State_Exitsel",
+		"Menu_State_10" , 
+		"Menu_State_15", 
+		"Menu_State_20", 
+		"Menu_State_10sel" , 
+		"Menu_State_15sel", 
 		"Menu_State_20sel"
 	});
 }

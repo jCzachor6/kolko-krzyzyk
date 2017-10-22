@@ -17,7 +17,7 @@ PlayState::PlayState(GameDataRef data, int size)
 
 void PlayState::Init()
 {
-	data->assetManager.LoadTexture("Menu_State_Background", "Resources/PlayState/playScreen.png");
+	data->assetManager.LoadTexture("Play_State_Background", "Resources/PlayState/playScreen.png");
 	data->assetManager.LoadTexture("tile_empty", "Resources/PlayState/empty.png");
 	data->assetManager.LoadTexture("tile_selected", "Resources/PlayState/selected.png");
 	data->assetManager.LoadTexture("tile_circle", "Resources/PlayState/circle.png");
@@ -29,7 +29,7 @@ void PlayState::Init()
 	data->assetManager.LoadTexture("menu", "Resources/PlayState/menu.png");
 	data->assetManager.LoadTexture("menusel", "Resources/PlayState/menusel.png");
 
-	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Menu_State_Background"));
+	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Play_State_Background"));
 	circleSprite.setTexture(this->data->assetManager.GetTexture("O"));
 	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
@@ -105,9 +105,16 @@ void PlayState::Remove()
 		delete menuButton;
 	}
 	data->assetManager.RemoveTexture({
-		"Menu_State_Background", "tile_empty" , "tile_selected",
-		"tile_circle", "tile_cross" , "O",
-		"X", "arrow" , "crown",
-		"menu", "menusel"
+		"Play_State_Background", 
+		"tile_empty" , 
+		"tile_selected",
+		"tile_circle", 
+		"tile_cross" , 
+		"O",
+		"X", 
+		"arrow" , 
+		"crown",
+		"menu", 
+		"menusel"
 	});
 }

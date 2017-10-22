@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "MainGame.hpp"
-
+#include "GridLayout.hpp"
 
 class SplashState : public State
 {
@@ -16,6 +16,7 @@ public:
 
 private:
 	GameDataRef data;
+	GridLayout *gridLayout;
 	sf::Clock clock;
 	sf::Sprite backgroundSprite;
 };

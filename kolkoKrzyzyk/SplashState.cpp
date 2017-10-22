@@ -42,7 +42,9 @@ void SplashState::Draw(float dt)
 
 void SplashState::Remove()
 {
-	data->assetManager.RemoveTexture({ "Splash_State_Background" });
+	data->assetManager.RemoveTexture({ 
+		"Splash_State_Background" 
+	});
 }
 
 

@@ -1,10 +1,11 @@
 #include "MainGame.hpp"
 #include "SplashState.hpp"
+#include "DEFINITIONS.hpp"
 
 MainGame::MainGame(int width, int height, std::string title)
 {
 	data->renderWindow.create(sf::VideoMode(width, height), title, sf::Style::Close|sf::Style::Titlebar);
-	data->renderWindow.setFramerateLimit(60);
+	data->renderWindow.setFramerateLimit(FPS_LIMIT);
 	data->stateManager.AddState(StateRef(new SplashState(this->data)));
 }
 
