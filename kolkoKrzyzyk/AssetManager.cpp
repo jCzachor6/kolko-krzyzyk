@@ -8,20 +8,17 @@ void AssetManager::LoadTexture(std::string name, std::string fileName)
 	}
 }
 
-sf::Texture & AssetManager::GetTextrure(std::string name)
+sf::Texture & AssetManager::GetTexture(std::string name)
 {
 	return this->textures.at(name);
 }
 
-void AssetManager::LoadFont(std::string name, std::string fileName)
+void AssetManager::RemoveTexture(std::initializer_list<std::string> stringList)
 {
-	sf::Font font;
-	if (font.loadFromFile(fileName)) {
-		this->fonts[name] = font;
+	std::map<std::string, sf::Texture>::iterator it;
+	for (std::string removed :stringList) {
+		it = this->textures.find(removed);
+		this->textures.erase(it);
 	}
 }
 
-sf::Font & AssetManager::GetFont(std::string name)
-{
-	return this->fonts.at(name);
-}

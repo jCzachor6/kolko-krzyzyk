@@ -22,6 +22,7 @@ void GameStateManager::ProcessStateChanges() {
 	if (this->isAdding) {
 		if (!this->states.empty()) {
 			if (this->isReplacing) {
+				this->states.top()->Remove();
 				this->states.pop();
 			}
 			else {

@@ -8,9 +8,7 @@ bool InputManager::IsSpriteClicked(sf::Sprite object, sf::Mouse::Button button, 
 			, object.getPosition().y
 			, object.getGlobalBounds().width
 			, object.getGlobalBounds().height);
-		if (tempRect.contains(sf::Mouse::getPosition(window))) {
-			return true;
-			}
+		return (tempRect.contains(sf::Mouse::getPosition(window)));
 	}
 	return false;
 }
@@ -22,12 +20,7 @@ bool InputManager::IsMouseOnSprite(sf::Sprite object, sf::RenderWindow & window)
 		, object.getPosition().y
 		, object.getGlobalBounds().width
 		, object.getGlobalBounds().height);
-	if (tempRect.contains(sf::Mouse::getPosition(window))) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return tempRect.contains(sf::Mouse::getPosition(window));
 }
 
 sf::Vector2i InputManager::GetMousePosition(sf::RenderWindow & window)

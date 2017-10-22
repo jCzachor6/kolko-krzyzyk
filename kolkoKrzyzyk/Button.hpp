@@ -3,8 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include "MainGame.hpp"
 #include <functional>
-#include <iostream>
 
+
+//default onClick function throws exception, to fix use setOnClick()
 inline void defaultOnClick() {
 	throw std::invalid_argument("onClick method not initialized!");
 }

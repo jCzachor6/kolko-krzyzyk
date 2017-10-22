@@ -2,20 +2,21 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "MainGame.hpp"
-
+#include "GridLayout.hpp"
 
 class SplashState : public State
 {
 public:
 	SplashState(GameDataRef data);
-	~SplashState();
 	void Init();
 	void HandleInput();
-	void Update(float dt);
-	void Draw(float dt);
+	void Update();
+	void Draw();
+	void Remove();
 
 private:
 	GameDataRef data;
+	GridLayout *gridLayout;
 	sf::Clock clock;
 	sf::Sprite backgroundSprite;
 };

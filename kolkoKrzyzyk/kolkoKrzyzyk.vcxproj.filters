@@ -25,6 +25,12 @@
     <Filter Include="Source Files\kolkoKrzyzyk">
       <UniqueIdentifier>{1663858d-ef5a-44ca-95ac-c47aed92f63e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine\items">
+      <UniqueIdentifier>{9adca1ff-4079-4217-b3ab-a3d65724f5ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\items">
+      <UniqueIdentifier>{1f64ade4-58f0-4afb-920d-39fd5cb65b3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,11 +63,14 @@
     <ClCompile Include="tile.cpp">
       <Filter>Source Files\kolkoKrzyzyk</Filter>
     </ClCompile>
-    <ClCompile Include="GridLayout.cpp">
-      <Filter>Source Files\engine</Filter>
-    </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Source Files\engine</Filter>
+      <Filter>Source Files\engine\items</Filter>
+    </ClCompile>
+    <ClCompile Include="GridLayout.cpp">
+      <Filter>Source Files\engine\items</Filter>
+    </ClCompile>
+    <ClCompile Include="Selector.cpp">
+      <Filter>Source Files\engine\items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,10 +108,13 @@
       <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
     <ClInclude Include="GridLayout.hpp">
-      <Filter>Header Files\engine</Filter>
+      <Filter>Header Files\engine\items</Filter>
     </ClInclude>
     <ClInclude Include="Button.hpp">
-      <Filter>Header Files\engine</Filter>
+      <Filter>Header Files\engine\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Selector.hpp">
+      <Filter>Header Files\engine\items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

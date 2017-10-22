@@ -16,7 +16,7 @@ PlayState::PlayState(GameDataRef data, int size)
 
 void PlayState::Init()
 {
-	data->assetManager.LoadTexture("Menu_State_Background", "Resources/PlayState/playScreen.png");
+	data->assetManager.LoadTexture("Play_State_Background", "Resources/PlayState/playScreen.png");
 	data->assetManager.LoadTexture("tile_empty", "Resources/PlayState/empty.png");
 	data->assetManager.LoadTexture("tile_selected", "Resources/PlayState/selected.png");
 	data->assetManager.LoadTexture("tile_circle", "Resources/PlayState/circle.png");
@@ -28,13 +28,17 @@ void PlayState::Init()
 	data->assetManager.LoadTexture("menu", "Resources/PlayState/menu.png");
 	data->assetManager.LoadTexture("menusel", "Resources/PlayState/menusel.png");
 
-	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Menu_State_Background"));
-	circleSprite.setTexture(this->data->assetManager.GetTextrure("O"));
-	crossSprite.setTexture(this->data->assetManager.GetTextrure("X"));
-	arrowSprite.setTexture(this->data->assetManager.GetTextrure("arrow"));
+	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Play_State_Background"));
+	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
+	backgroundSprite.setScale(newScale);
+
+	circleSprite.setTexture(this->data->assetManager.GetTexture("O"));
+	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
+	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
 	board = new Board(this->data, this->board_size);
-	menuButton = new Button(this->data,
+	menuButton = new Button(
+		this->data,
 		sf::Vector2i(gridLayout->getPosition(33, 10)),
 		"menu", "menusel");
 	menuButton->setOnClick([&]() {
@@ -57,21 +61,19 @@ void PlayState::HandleInput()
 	}
 }
 
-void PlayState::Update(float dt)
+void PlayState::Update()
 {
 	if (xTurn) {
-		arrowSprite.setPosition(gridLayout->getPosition(1, 3));
-	}else {
 		arrowSprite.setPosition(gridLayout->getPosition(4, 3));
+	}else {
+		arrowSprite.setPosition(gridLayout->getPosition(1, 3));
 	}
 
 	if (isWin) {
-		crownSprite.setTexture(this->data->assetManager.GetTextrure("crown"));
+		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
 		if (xTurn) {
-			std::cout << "O wygralo" << std::endl;
 			crownSprite.setPosition(gridLayout->getPosition(1, 1));
 		} else {
-			std::cout << "X wygralo" << std::endl;
 			crownSprite.setPosition(gridLayout->getPosition(4, 1));
 		}
 		lockInput = true;
@@ -81,7 +83,7 @@ void PlayState::Update(float dt)
 	}
 }
 
-void PlayState::Draw(float dt)
+void PlayState::Draw()
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
@@ -92,4 +94,28 @@ void PlayState::Draw(float dt)
 	board->drawTiles();
 	menuButton->draw();
 	data->renderWindow.display();
+}
+
+void PlayState::Remove()
+{
+	delete gridLayout;
+	if (board != NULL) {
+		delete board;
+	}
+	if (menuButton != NULL) {
+		delete menuButton;
+	}
+	data->assetManager.RemoveTexture({
+		"Play_State_Background", 
+		"tile_empty" , 
+		"tile_selected",
+		"tile_circle", 
+		"tile_cross" , 
+		"O",
+		"X", 
+		"arrow" , 
+		"crown",
+		"menu", 
+		"menusel"
+	});
 }

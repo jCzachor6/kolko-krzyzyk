@@ -3,6 +3,7 @@
 #include <iostream>
 #include "MenuState.hpp"
 #include "PlayState.hpp"
+#include "DEFINITIONS.hpp"
 
 SplashState::SplashState(GameDataRef data)
 {
@@ -10,14 +11,12 @@ SplashState::SplashState(GameDataRef data)
 }
 
 
-SplashState::~SplashState()
-{
-}
-
 void SplashState::Init()
 {
 	data->assetManager.LoadTexture("Splash_State_Background", "Resources/SplashState/splashScreen.png");
-	backgroundSprite.setTexture(this->data->assetManager.GetTextrure("Splash_State_Background"));
+	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Splash_State_Background"));
+	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
+	backgroundSprite.setScale(newScale);
 }
 
 void SplashState::HandleInput()
@@ -30,18 +29,25 @@ void SplashState::HandleInput()
 	}
 }
 
-void SplashState::Update(float dt)
+void SplashState::Update()
 {
-	if (clock.getElapsedTime().asSeconds() > 1.5) {
+	if (clock.getElapsedTime().asSeconds() > 4) {
 		data->stateManager.AddState(StateRef(new MenuState(this->data)));
 	}
 }
 
-void SplashState::Draw(float dt)
+void SplashState::Draw()
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
 	data->renderWindow.display();
+}
+
+void SplashState::Remove()
+{
+	data->assetManager.RemoveTexture({ 
+		"Splash_State_Background" 
+	});
 }
 
 
