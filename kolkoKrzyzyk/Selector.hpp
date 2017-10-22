@@ -12,7 +12,7 @@ class Selector
 public:
 	Selector(GameDataRef data);
 	~Selector();
-	void addItem(sf::Vector2f pos, int returnValue, std::string notSelected, std::string selected);
+	void addSelectable(sf::Vector2f pos, int returnValue, std::string notSelected, std::string selected);
 	void handleInput();
 	void draw();
 	void setDefault();
@@ -21,16 +21,15 @@ public:
 private:
 	GameDataRef data;
 
-	class Item
+	struct Selectable
 	{
-	public:
 		sf::Sprite sprite;
 		std::string notSelected;
 		std::string selected;
 		int returnValue;
 	};
 
-	std::vector<Item> items;
+	std::vector<Selectable> items;
 	int returnValue;
 
 

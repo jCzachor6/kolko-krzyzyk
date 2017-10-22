@@ -1,7 +1,7 @@
 #include "MenuState.hpp"
 #include "DEFINITIONS.hpp"
 #include "PlayState.hpp"
-
+#include <iostream>
 
 MenuState::MenuState(GameDataRef data)
 {
@@ -10,20 +10,6 @@ MenuState::MenuState(GameDataRef data)
 	gridLayout = new  GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
 	gridLayout->setRows(12, 12);
 	boardSize = new Selector(this->data);
-}
-
-MenuState::~MenuState() {
-	delete gridLayout;
-	delete boardSize;
-	if (twoPlayers != NULL) {
-		delete twoPlayers;
-	}
-	if (onePlayer != NULL) {
-		delete onePlayer;
-	}
-	if (exitGame != NULL) {
-		delete exitGame;
-	}
 }
 
 void MenuState::Init()
@@ -65,9 +51,9 @@ void MenuState::Init()
 		data->renderWindow.close();
 	});
 	
-	boardSize->addItem(gridLayout->getPosition(4, 3), 10, "Menu_State_10", "Menu_State_10sel");
-	boardSize->addItem(gridLayout->getPosition(6, 3), 15, "Menu_State_15", "Menu_State_15sel");
-	boardSize->addItem(gridLayout->getPosition(8, 3), 20, "Menu_State_20", "Menu_State_20sel");
+	boardSize->addSelectable(gridLayout->getPosition(4, 3), 10, "Menu_State_10", "Menu_State_10sel");
+	boardSize->addSelectable(gridLayout->getPosition(6, 3), 15, "Menu_State_15", "Menu_State_15sel");
+	boardSize->addSelectable(gridLayout->getPosition(8, 3), 20, "Menu_State_20", "Menu_State_20sel");
 	boardSize->setDefault();
 }
 
@@ -100,5 +86,27 @@ void MenuState::Draw(float dt)
 	onePlayer->draw();
 	exitGame->draw();
 	data->renderWindow.display();
+}
+
+void MenuState::Remove()
+{
+	delete gridLayout;
+	delete boardSize;
+	if (twoPlayers != NULL) {
+		delete twoPlayers;
+	}
+	if (onePlayer != NULL) {
+		delete onePlayer;
+	}
+	if (exitGame != NULL) {
+		delete exitGame;
+	}
+	data->assetManager.RemoveTexture({ 
+		"Menu_State_Background", "Menu_State_Two" , "Menu_State_One", 
+		"Menu_State_Exit", "Menu_State_Twosel" , "Menu_State_Onesel", 
+		"Menu_State_Exitsel", "Menu_State_10" , "Menu_State_15", 
+		"Menu_State_20", "Menu_State_10sel" , "Menu_State_15sel", 
+		"Menu_State_20sel"
+	});
 }
 

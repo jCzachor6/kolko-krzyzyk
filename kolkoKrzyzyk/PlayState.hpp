@@ -11,11 +11,11 @@ class PlayState : public State
 {
 public:
 	PlayState(GameDataRef data, int size);
-	~PlayState();
 	void Init();
 	void HandleInput();
 	void Update(float dt);
 	void Draw(float dt);
+	void Remove();
 
 private:
 	GameDataRef data;

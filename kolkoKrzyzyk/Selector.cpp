@@ -12,9 +12,9 @@ Selector::~Selector()
 {
 }
 
-void Selector::addItem(sf::Vector2f pos, int returnValue, std::string notSelected, std::string selected)
+void Selector::addSelectable(sf::Vector2f pos, int returnValue, std::string notSelected, std::string selected)
 {
-	Item item;
+	Selectable item;
 	item.sprite = sf::Sprite(data->assetManager.GetTexture(notSelected));
 	item.sprite.setPosition(pos);
 	item.notSelected = notSelected;

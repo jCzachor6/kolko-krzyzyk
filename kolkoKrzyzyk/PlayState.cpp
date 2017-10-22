@@ -14,16 +14,6 @@ PlayState::PlayState(GameDataRef data, int size)
 	gridLayout->setRows(12, 36);
 }
 
-PlayState::~PlayState()
-{
-	delete gridLayout;
-	if (board != NULL) {
-		delete board;
-	}
-	if (menuButton != NULL) {
-		delete menuButton;
-	}
-}
 
 void PlayState::Init()
 {
@@ -103,4 +93,21 @@ void PlayState::Draw(float dt)
 	board->drawTiles();
 	menuButton->draw();
 	data->renderWindow.display();
+}
+
+void PlayState::Remove()
+{
+	delete gridLayout;
+	if (board != NULL) {
+		delete board;
+	}
+	if (menuButton != NULL) {
+		delete menuButton;
+	}
+	data->assetManager.RemoveTexture({
+		"Menu_State_Background", "tile_empty" , "tile_selected",
+		"tile_circle", "tile_cross" , "O",
+		"X", "arrow" , "crown",
+		"menu", "menusel"
+	});
 }

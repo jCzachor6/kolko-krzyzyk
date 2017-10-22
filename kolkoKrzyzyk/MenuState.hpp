@@ -15,6 +15,7 @@ public:
 	void HandleInput();
 	void Update(float dt);
 	void Draw(float dt);
+	void Remove();
 
 private:
 	int selectedSize;

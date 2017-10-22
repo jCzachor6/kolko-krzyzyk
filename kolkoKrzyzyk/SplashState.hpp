@@ -8,11 +8,11 @@ class SplashState : public State
 {
 public:
 	SplashState(GameDataRef data);
-	~SplashState();
 	void Init();
 	void HandleInput();
 	void Update(float dt);
 	void Draw(float dt);
+	void Remove();
 
 private:
 	GameDataRef data;

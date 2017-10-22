@@ -10,10 +10,6 @@ SplashState::SplashState(GameDataRef data)
 }
 
 
-SplashState::~SplashState()
-{
-}
-
 void SplashState::Init()
 {
 	data->assetManager.LoadTexture("Splash_State_Background", "Resources/SplashState/splashScreen.png");
@@ -42,6 +38,11 @@ void SplashState::Draw(float dt)
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
 	data->renderWindow.display();
+}
+
+void SplashState::Remove()
+{
+	data->assetManager.RemoveTexture({ "Splash_State_Background" });
 }
 
 
