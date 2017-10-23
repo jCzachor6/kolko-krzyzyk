@@ -1,6 +1,6 @@
 #include "Button.hpp"
 
-Button::Button(GameDataRef data, sf::Vector2i position, std::string notSelected, std::string selected)
+Button::Button(GameDataPtr data, sf::Vector2i position, std::string notSelected, std::string selected)
 {
 	this->data = data;
 	this->sprite.setTexture(this->data->assetManager.GetTexture(notSelected));

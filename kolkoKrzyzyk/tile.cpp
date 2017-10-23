@@ -2,7 +2,7 @@
 
 
 
-tile::tile(GameDataRef data, int x, int y)
+tile::tile(GameDataPtr data, int x, int y)
 {
 	this->data = data;
 	setState('e');

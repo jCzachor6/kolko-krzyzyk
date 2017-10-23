@@ -3,7 +3,7 @@
 #include "DEFINITIONS.hpp"
 #include "MenuState.hpp"
 
-PlayState::PlayState(GameDataRef data, int size)
+PlayState::PlayState(GameDataPtr data, int size)
 {
 	this->data = data;
 	this->board_size = size;
@@ -42,7 +42,7 @@ void PlayState::Init()
 		sf::Vector2i(gridLayout->getPosition(33, 10)),
 		"menu", "menusel");
 	menuButton->setOnClick([&]() {
-		data->stateManager.AddState(StateRef(new MenuState(this->data)));
+		data->stateManager.AddState(StatePtr(new MenuState(this->data)));
 	});
 
 	circleSprite.setPosition(gridLayout->getPosition(1, 2));

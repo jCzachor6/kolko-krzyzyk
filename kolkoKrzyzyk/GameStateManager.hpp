@@ -4,7 +4,7 @@
 #include <stack>
 #include "State.hpp"
 
-typedef std::unique_ptr<State> StateRef;
+typedef std::unique_ptr<State> StatePtr;
 
 class GameStateManager
 {
@@ -12,16 +12,16 @@ public:
 	GameStateManager() {};
 	~GameStateManager() {};
 
-	void AddState(StateRef newState, bool isReplacing = true);
-	void RemoveState();
+	void AddState(StatePtr state, bool isReplacing = true);
+	void DeleteState();
 	void ProcessStateChanges();
 
-	StateRef &GetActiveState();
+	StatePtr &GetCurrentState();
 
 private: 
-	std::stack <StateRef> states;
-	StateRef newState;
-	bool isRemoving;
+	std::stack <StatePtr> states;
+	StatePtr newState;
+	bool isDeleting;
 	bool isAdding;
 	bool isReplacing;
 };

@@ -7,7 +7,7 @@
 class SplashState : public State
 {
 public:
-	SplashState(GameDataRef data);
+	SplashState(GameDataPtr data);
 	void Init();
 	void HandleInput();
 	void Update();
@@ -15,7 +15,7 @@ public:
 	void Remove();
 
 private:
-	GameDataRef data;
+	GameDataPtr data;
 	GridLayout *gridLayout;
 	sf::Clock clock;
 	sf::Sprite backgroundSprite;

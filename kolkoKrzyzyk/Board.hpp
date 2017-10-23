@@ -7,12 +7,12 @@
 class Board
 {
 public:
-	Board(GameDataRef data, int size);
+	Board(GameDataPtr data, int size);
 	void drawTiles();
 	void handleInput(bool *xTurn);
 	void update(bool *isWin);
 private:
-	GameDataRef data;
+	GameDataPtr data;
 	std::vector<std::vector<tile>> tilesVector;
 	int boardSize;
 	void setupBoard();

@@ -6,25 +6,27 @@ MainGame::MainGame(int width, int height, std::string title)
 {
 	data->renderWindow.create(sf::VideoMode(width, height), title, sf::Style::Close|sf::Style::Titlebar);
 	data->renderWindow.setFramerateLimit(FPS_LIMIT);
-	data->stateManager.AddState(StateRef(new SplashState(this->data)));
+	data->stateManager.AddState(StatePtr(new SplashState(this->data)));
 }
 
 
 void MainGame::Run()
 {
 	while (this->data->renderWindow.isOpen()) {
-		this->data->stateManager.ProcessStateChanges();
 			this->data
 				->stateManager
-				.GetActiveState()
+				.ProcessStateChanges();
+			this->data
+				->stateManager
+				.GetCurrentState()
 				->HandleInput();
 			this->data
 				->stateManager
-				.GetActiveState()
+				.GetCurrentState()
 				->Update();
 			this->data
 				->stateManager
-				.GetActiveState()
+				.GetCurrentState()
 				->Draw();
 	}
 }

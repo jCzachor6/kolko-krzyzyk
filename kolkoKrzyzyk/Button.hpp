@@ -14,12 +14,12 @@ inline void defaultOnClick() {
 class Button
 {
 public:
-	Button(GameDataRef data, sf::Vector2i position, std::string notSelected, std::string selected);
+	Button(GameDataPtr data, sf::Vector2i position, std::string notSelected, std::string selected);
 	void draw();
 	void handleInput();
 	void setOnClick(std::function<void()> onClick);
 private:
-	GameDataRef data;
+	GameDataPtr data;
 	sf::Sprite sprite;
 	std::string notSelected;
 	std::string selected;

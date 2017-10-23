@@ -7,14 +7,14 @@
 class tile
 {
 public:
-	tile(GameDataRef data, int x, int y);
+	tile(GameDataPtr data, int x, int y);
 	void drawTile();
 	void setState(char state);
 	void handleInput(bool *xTurn, bool *isChecked);
 	bool isEmpty();
 	char getState();
 private:
-	GameDataRef data;
+	GameDataPtr data;
 	sf::Sprite sprite;
 	char state;
 };

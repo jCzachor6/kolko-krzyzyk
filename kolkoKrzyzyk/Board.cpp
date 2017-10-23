@@ -2,7 +2,7 @@
 #include "DEFINITIONS.hpp"
 #include <iostream>
 
-Board::Board(GameDataRef data, int size)
+Board::Board(GameDataPtr data, int size)
 {
 	this->data = data;
 	this->boardSize = size;

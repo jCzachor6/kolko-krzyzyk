@@ -5,7 +5,7 @@
 #include "PlayState.hpp"
 #include "DEFINITIONS.hpp"
 
-SplashState::SplashState(GameDataRef data)
+SplashState::SplashState(GameDataPtr data)
 {
 	this->data = data;
 }
@@ -32,7 +32,7 @@ void SplashState::HandleInput()
 void SplashState::Update()
 {
 	if (clock.getElapsedTime().asSeconds() > 4) {
-		data->stateManager.AddState(StateRef(new MenuState(this->data)));
+		data->stateManager.AddState(StatePtr(new MenuState(this->data)));
 	}
 }
 

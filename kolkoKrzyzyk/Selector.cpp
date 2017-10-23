@@ -2,7 +2,7 @@
 
 
 
-Selector::Selector(GameDataRef data)
+Selector::Selector(GameDataPtr data)
 {
 	this->data = data;
 }

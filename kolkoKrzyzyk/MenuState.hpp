@@ -9,7 +9,7 @@
 class MenuState : public State
 {
 public:
-	MenuState(GameDataRef data);
+	MenuState(GameDataPtr data);
 
 	void Init();
 	void HandleInput();
@@ -19,7 +19,7 @@ public:
 
 private:
 	int selectedSize;
-	GameDataRef data;
+	GameDataPtr data;
 	sf::Sprite backgroundSprite;
 	sf::Sprite p10Sprite, p15Sprite, p20Sprite;
 	GridLayout *gridLayout;

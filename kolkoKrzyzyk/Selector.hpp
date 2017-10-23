@@ -10,7 +10,7 @@
 class Selector
 {
 public:
-	Selector(GameDataRef data);
+	Selector(GameDataPtr data);
 	~Selector();
 	void addSelectable(sf::Vector2f pos, int returnValue, std::string notSelected, std::string selected);
 	void handleInput();
@@ -19,7 +19,7 @@ public:
 	int getReturnValue();
 
 private:
-	GameDataRef data;
+	GameDataPtr data;
 
 	struct Selectable
 	{

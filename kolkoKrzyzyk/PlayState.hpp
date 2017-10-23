@@ -10,7 +10,7 @@
 class PlayState : public State
 {
 public:
-	PlayState(GameDataRef data, int size);
+	PlayState(GameDataPtr data, int size);
 	void Init();
 	void HandleInput();
 	void Update();
@@ -18,7 +18,7 @@ public:
 	void Remove();
 
 private:
-	GameDataRef data;
+	GameDataPtr data;
 	int board_size;
 	sf::Clock clock;
 	sf::Sprite backgroundSprite;

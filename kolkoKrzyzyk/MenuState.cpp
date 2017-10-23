@@ -3,7 +3,7 @@
 #include "PlayState.hpp"
 #include <iostream>
 
-MenuState::MenuState(GameDataRef data)
+MenuState::MenuState(GameDataPtr data)
 {
 	this->data = data;
 	this->selectedSize = 10;
@@ -36,14 +36,14 @@ void MenuState::Init()
 		sf::Vector2i(gridLayout->getPosition(6, 5)),
 		"Menu_State_Two", "Menu_State_Twosel");
 	twoPlayers->setOnClick([&]() {
-		data->stateManager.AddState(StateRef(new PlayState(this->data, boardSize->getReturnValue())));
+		data->stateManager.AddState(StatePtr(new PlayState(this->data, boardSize->getReturnValue())));
 	});
 	
 	onePlayer = new Button(this->data,
 		sf::Vector2i(gridLayout->getPosition(6, 7)),
 		"Menu_State_One", "Menu_State_Onesel");
 	onePlayer->setOnClick([&]() {
-		//data->stateManager.AddState(StateRef(new PlayBotState(this->data, selectedSize)));
+		//data->stateManager.AddState(StatePtr(new PlayBotState(this->data, selectedSize)));
 	});
 
 	exitGame = new Button(this->data,

@@ -15,13 +15,13 @@ struct GameData {
 	InputManager inputManager;
 };
 
-typedef std::shared_ptr<GameData> GameDataRef;
+typedef std::shared_ptr<GameData> GameDataPtr;
 class MainGame
 {
 public:
 	MainGame(int width, int height, std::string title);
 	void Run();
 private:
-	GameDataRef data = std::make_shared<GameData>();
+	GameDataPtr data = std::make_shared<GameData>();
 };
 
