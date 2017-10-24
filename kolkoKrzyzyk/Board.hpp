@@ -10,14 +10,14 @@ public:
 	Board(GameDataPtr data, int size);
 	void drawTiles();
 	void handleInput(bool *xTurn);
-	void update(bool *isWin);
+	void update(char *isWin);
 private:
 	GameDataPtr data;
 	std::vector<std::vector<tile>> tilesVector;
 	int boardSize;
 	void setupBoard();
 	bool isChecked;
-	bool checkIfWin();
+	char checkIfWin();
 	bool goBottom(int x, int y, char state);
 	bool goDiagonalLeft(int x, int y, char state);
 	bool goDiagonalRight(int x, int y, char state);

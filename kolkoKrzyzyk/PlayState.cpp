@@ -63,23 +63,27 @@ void PlayState::HandleInput()
 
 void PlayState::Update()
 {
-	if (xTurn) {
-		arrowSprite.setPosition(gridLayout->getPosition(4, 3));
-	}else {
-		arrowSprite.setPosition(gridLayout->getPosition(1, 3));
-	}
-
-	if (isWin) {
+	switch (isWin) {
+	case 'x':
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
-		if (xTurn) {
-			crownSprite.setPosition(gridLayout->getPosition(1, 1));
-		} else {
-			crownSprite.setPosition(gridLayout->getPosition(4, 1));
-		}
+		crownSprite.setPosition(gridLayout->getPosition(4, 1));
+		arrowSprite.setPosition(gridLayout->getPosition(4, 3));
 		lockInput = true;
-		isWin = false;
-	}else {
+		break;
+	case 'o':
+		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
+		crownSprite.setPosition(gridLayout->getPosition(1, 1));
+		arrowSprite.setPosition(gridLayout->getPosition(1, 3));
+		lockInput = true;
+		break;
+	default: 
 		board->update(&isWin);
+		if (xTurn) {
+			arrowSprite.setPosition(gridLayout->getPosition(4, 3));
+		}else {
+			arrowSprite.setPosition(gridLayout->getPosition(1, 3));
+		}
+		break;
 	}
 }
 

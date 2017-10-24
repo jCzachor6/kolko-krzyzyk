@@ -32,7 +32,7 @@ private:
 	Button *menuButton;
 
 	bool xTurn;
-	bool isWin;
+	char isWin;
 	bool lockInput;
 };
 

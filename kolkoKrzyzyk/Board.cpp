@@ -28,7 +28,7 @@ void Board::handleInput(bool *xTurn)
 	}
 }
 
-void Board::update(bool *isWin)
+void Board::update(char *isWin)
 {
 	if (!isChecked) {
 		isChecked = true;
@@ -50,7 +50,7 @@ void Board::setupBoard()
 	}
 }
 
-bool Board::checkIfWin()
+char Board::checkIfWin()
 {
 	int inRowToWin = IN_ROW_TO_WIN;
 	int xRow = 0;
@@ -65,7 +65,7 @@ bool Board::checkIfWin()
 					|| goBottom(j, i, 'x')
 					|| goDiagonalLeft(j, i, 'x')
 					|| goDiagonalRight(j, i, 'x'))
-					return true;
+					return 'x';
 				break;
 			case 'o':
 				oRow++;
@@ -74,7 +74,7 @@ bool Board::checkIfWin()
 					|| goBottom(j, i, 'o')
 					|| goDiagonalLeft(j, i, 'o')
 					|| goDiagonalRight(j, i, 'o'))
-					return true;
+					return 'o';
 				break;
 			default:
 				xRow = 0;
@@ -84,7 +84,7 @@ bool Board::checkIfWin()
 
 		}
 	}
-	return false;
+	return 'e';
 }
 
 bool Board::goBottom(int x, int y, char state)
