@@ -72,6 +72,9 @@
     <ClCompile Include="Selector.cpp">
       <Filter>Source Files\engine\items</Filter>
     </ClCompile>
+    <ClCompile Include="PlayBotState.cpp">
+      <Filter>Source Files\kolkoKrzyzyk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.hpp">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="Selector.hpp">
       <Filter>Header Files\engine\items</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayBotState.hpp">
+      <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

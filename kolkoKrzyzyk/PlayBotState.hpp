@@ -6,10 +6,11 @@
 #include "GridLayout.hpp"
 #include "Button.hpp"
 
-class PlayState : public State
+class PlayBotState : public State
 {
 public:
-	PlayState(GameDataPtr data, int size);
+	PlayBotState(GameDataPtr data, int size, int difficulty);
+
 	void Init();
 	void HandleInput();
 	void Update();
@@ -20,7 +21,7 @@ private:
 	GameDataPtr data;
 	int board_size;
 	sf::Sprite backgroundSprite;
-	sf::Sprite circleSprite;
+	sf::Sprite aiSprite;
 	sf::Sprite crossSprite;
 	sf::Sprite arrowSprite;
 	sf::Sprite crownSprite;
