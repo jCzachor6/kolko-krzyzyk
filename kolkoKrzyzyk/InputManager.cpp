@@ -1,13 +1,27 @@
 #include "InputManager.hpp"
 
-bool InputManager::IsSpriteClicked(sf::Sprite object, sf::Mouse::Button button, sf::RenderWindow & window)
+bool InputManager::IsSpriteHold(sf::Sprite object, sf::Mouse::Button button, sf::RenderWindow & window)
 {
 	if (sf::Mouse::isButtonPressed(button)) {
-		sf::IntRect tempRect(
-			object.getPosition().x
-			, object.getPosition().y
-			, object.getGlobalBounds().width
-			, object.getGlobalBounds().height);
+			sf::IntRect tempRect(
+				object.getPosition().x
+				, object.getPosition().y
+				, object.getGlobalBounds().width
+				, object.getGlobalBounds().height);
+			return (tempRect.contains(sf::Mouse::getPosition(window)));
+	}
+	return false;
+}
+
+bool InputManager::IsSpritePressed(sf::Sprite object, sf::Mouse::Button button, sf::RenderWindow & window, sf::Event & ev)
+{
+	sf::IntRect tempRect(
+		object.getPosition().x
+		, object.getPosition().y
+		, object.getGlobalBounds().width
+		, object.getGlobalBounds().height);
+
+	if (ev.type == sf::Event::MouseButtonPressed && ev.key.code == button) {
 		return (tempRect.contains(sf::Mouse::getPosition(window)));
 	}
 	return false;

@@ -19,11 +19,11 @@ void Board::drawTiles()
 	}
 }
 
-void Board::handleInput(bool *xTurn)
+void Board::handleInput(bool *xTurn, sf::Event *ev)
 {
 	for (int i = 0; i < tilesVector.size(); i++) {
 		for (int j = 0; j < tilesVector.size(); j++) {
-			tilesVector.at(i).at(j).handleInput(xTurn, &isChecked);
+			tilesVector.at(i).at(j).handleInput(xTurn, &isChecked, ev);
 		}
 	}
 }

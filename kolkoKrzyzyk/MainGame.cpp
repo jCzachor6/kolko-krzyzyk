@@ -6,6 +6,7 @@ MainGame::MainGame(int width, int height, std::string title)
 {
 	data->renderWindow.create(sf::VideoMode(width, height), title, sf::Style::Close|sf::Style::Titlebar);
 	data->renderWindow.setFramerateLimit(FPS_LIMIT);
+	data->renderWindow.setKeyRepeatEnabled(false);
 	data->stateManager.AddState(StatePtr(new SplashState(this->data)));
 }
 

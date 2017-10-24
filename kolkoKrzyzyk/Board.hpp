@@ -9,7 +9,7 @@ class Board
 public:
 	Board(GameDataPtr data, int size);
 	void drawTiles();
-	void handleInput(bool *xTurn);
+	void handleInput(bool *xTurn, sf::Event *ev);
 	void update(char *isWin);
 private:
 	GameDataPtr data;

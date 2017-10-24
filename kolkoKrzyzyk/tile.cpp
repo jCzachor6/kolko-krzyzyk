@@ -33,12 +33,12 @@ void tile::setState(char state)
 	}
 }
 
-void tile::handleInput(bool *xTurn, bool *isChecked)
+void tile::handleInput(bool *xTurn, bool *isChecked, sf::Event *ev)
 {
 	if (isEmpty()) {
 		if (data->inputManager.IsMouseOnSprite(this->sprite, data->renderWindow)) {
 			this->sprite.setTexture(this->data->assetManager.GetTexture("tile_selected"));
-			if ((data->inputManager.IsSpriteClicked(this->sprite, sf::Mouse::Button::Left, data->renderWindow))) {
+			if ((data->inputManager.IsSpritePressed(this->sprite, sf::Mouse::Button::Left, data->renderWindow, *ev))) {
 				if (*xTurn) {
 					setState('x');
 					*xTurn = false;

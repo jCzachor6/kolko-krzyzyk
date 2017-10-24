@@ -10,7 +10,7 @@ public:
 	tile(GameDataPtr data, int x, int y);
 	void drawTile();
 	void setState(char state);
-	void handleInput(bool *xTurn, bool *isChecked);
+	void handleInput(bool *xTurn, bool *isChecked, sf::Event *ev);
 	bool isEmpty();
 	char getState();
 private:

@@ -56,8 +56,8 @@ void PlayState::HandleInput()
 		if (sf::Event::Closed == event.type) {
 			data->renderWindow.close();
 		}
-		menuButton->handleInput();
-		if(!lockInput) board->handleInput(&xTurn);
+			menuButton->handleInput();
+			if (!lockInput) board->handleInput(&xTurn, &event);
 	}
 }
 
