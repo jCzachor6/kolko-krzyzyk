@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "MainGame.hpp"
@@ -22,6 +23,7 @@ private:
 	int board_size;
 	sf::Sprite backgroundSprite;
 	sf::Sprite aiSprite;
+	sf::Sprite circleSprite;
 	sf::Sprite crossSprite;
 	sf::Sprite arrowSprite;
 	sf::Sprite crownSprite;

@@ -1,6 +1,5 @@
 #include "Board.hpp"
 #include "DEFINITIONS.hpp"
-#include <iostream>
 
 Board::Board(GameDataPtr data, int size)
 {

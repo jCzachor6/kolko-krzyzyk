@@ -21,6 +21,7 @@ void PlayBotState::Init()
 	data->assetManager.LoadTexture("tile_circle", "Resources/PlayState/circle.png");
 	data->assetManager.LoadTexture("tile_cross", "Resources/PlayState/cross.png");
 	data->assetManager.LoadTexture("ai", "Resources/PlayState/AI.png");
+	data->assetManager.LoadTexture("O", "Resources/PlayState/O.png");
 	data->assetManager.LoadTexture("X", "Resources/PlayState/X.png");
 	data->assetManager.LoadTexture("arrow", "Resources/PlayState/arrow.png");
 	data->assetManager.LoadTexture("crown", "Resources/PlayState/crown.png");
@@ -32,6 +33,7 @@ void PlayBotState::Init()
 	backgroundSprite.setScale(newScale);
 
 	aiSprite.setTexture(this->data->assetManager.GetTexture("ai"));
+	circleSprite.setTexture(this->data->assetManager.GetTexture("O"));
 	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
@@ -46,6 +48,7 @@ void PlayBotState::Init()
 	});
 
 	aiSprite.setPosition(gridLayout->getPosition(1, 2));
+	circleSprite.setPosition(gridLayout->getPosition(1, 2));
 	crossSprite.setPosition(gridLayout->getPosition(4, 2));
 }
 
@@ -57,7 +60,9 @@ void PlayBotState::HandleInput()
 			data->renderWindow.close();
 		}
 		menuButton->handleInput();
-		if (!lockInput) board->handleInput(&xTurn, &event);
+		if (!lockInput && xTurn) {
+			board->handleInput(&xTurn, &event);
+		}
 	}
 }
 
@@ -83,6 +88,14 @@ void PlayBotState::Update()
 		}
 		else {
 			arrowSprite.setPosition(gridLayout->getPosition(1, 3));
+			/*
+			TODO BOT
+			bot->analyze(board->getBoardTileStates());
+			bestPoints = bot->getBestPoints();
+			int rnd = random(0 - bestPoints.size())
+			board->setPoint(bestPoints.at(rnd), 'o');
+			xTurn = true;
+			*/
 		}
 		break;
 	}
@@ -92,11 +105,16 @@ void PlayBotState::Draw()
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
+	data->renderWindow.draw(circleSprite);
 	data->renderWindow.draw(aiSprite);
 	data->renderWindow.draw(crossSprite);
 	data->renderWindow.draw(arrowSprite);
 	data->renderWindow.draw(crownSprite);
 	board->drawTiles();
+	/*
+	TODO BOT
+	bot->drawPointsOfInterest();
+	*/
 	menuButton->draw();
 	data->renderWindow.display();
 }
@@ -117,6 +135,7 @@ void PlayBotState::Remove()
 		"tile_circle",
 		"tile_cross" ,
 		"ai",
+		"O",
 		"X",
 		"arrow" ,
 		"crown",

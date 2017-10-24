@@ -75,6 +75,9 @@
     <ClCompile Include="PlayBotState.cpp">
       <Filter>Source Files\kolkoKrzyzyk</Filter>
     </ClCompile>
+    <ClCompile Include="AIbot.cpp">
+      <Filter>Source Files\kolkoKrzyzyk</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.hpp">
@@ -120,6 +123,9 @@
       <Filter>Header Files\engine\items</Filter>
     </ClInclude>
     <ClInclude Include="PlayBotState.hpp">
+      <Filter>Header Files\kolkoKrzyzyk</Filter>
+    </ClInclude>
+    <ClInclude Include="AIbot.hpp">
       <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
   </ItemGroup>
