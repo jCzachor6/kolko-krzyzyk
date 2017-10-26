@@ -6,6 +6,7 @@ PlayBotState::PlayBotState(GameDataPtr data, int size, int difficulty)
 {
 	this->data = data;
 	this->board_size = size;
+	this->difficulty = difficulty;
 	this->xTurn = true;
 	this->isWin = false;
 	this->lockInput = false;
@@ -27,6 +28,7 @@ void PlayBotState::Init()
 	data->assetManager.LoadTexture("crown", "Resources/PlayState/crown.png");
 	data->assetManager.LoadTexture("menu", "Resources/PlayState/menu.png");
 	data->assetManager.LoadTexture("menusel", "Resources/PlayState/menusel.png");
+	data->assetManager.LoadFont("font", "Resources/Fonts/DroidSansMono-Regular.ttf");
 
 	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Play_State_Background"));
 	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
@@ -38,6 +40,7 @@ void PlayBotState::Init()
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
 	board = new Board(this->data, this->board_size);
+	bot = new AI(this->data, difficulty, "font");
 
 	menuButton = new Button(
 		this->data,
@@ -94,8 +97,10 @@ void PlayBotState::Update()
 			bestPoints = bot->getBestPoints();
 			int rnd = random(0 - bestPoints.size())
 			board->setPoint(bestPoints.at(rnd), 'o');
-			xTurn = true;
+			
 			*/
+			bot->analyze(board->getBoardTileStates());
+			xTurn = true;
 		}
 		break;
 	}
@@ -111,11 +116,8 @@ void PlayBotState::Draw()
 	data->renderWindow.draw(arrowSprite);
 	data->renderWindow.draw(crownSprite);
 	board->drawTiles();
-	/*
-	TODO BOT
-	bot->drawPointsOfInterest();
-	*/
 	menuButton->draw();
+	bot->drawPointsOfInterest();
 	data->renderWindow.display();
 }
 

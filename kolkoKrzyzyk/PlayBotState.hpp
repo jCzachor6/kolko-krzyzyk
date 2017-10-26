@@ -6,6 +6,7 @@
 #include "Board.hpp"
 #include "GridLayout.hpp"
 #include "Button.hpp"
+#include "AI.hpp"
 
 class PlayBotState : public State
 {
@@ -35,5 +36,8 @@ private:
 	bool xTurn;
 	char isWin;
 	bool lockInput;
+
+	int difficulty;
+	AI *bot;
 };
 

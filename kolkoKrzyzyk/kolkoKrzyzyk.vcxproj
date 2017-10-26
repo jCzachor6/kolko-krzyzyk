@@ -125,7 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AIbot.cpp" />
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -142,7 +142,7 @@
     <ClCompile Include="tile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIbot.hpp" />
+    <ClInclude Include="AI.hpp" />
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="Board.hpp" />
     <ClInclude Include="Button.hpp" />

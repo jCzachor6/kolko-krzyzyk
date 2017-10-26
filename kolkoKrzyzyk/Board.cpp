@@ -35,6 +35,21 @@ void Board::update(char *isWin)
 	}
 }
 
+std::vector<std::vector<char>> Board::getBoardTileStates()
+{
+	std::vector<std::vector<char>> charBoard;
+
+	for (int i = 0; i < boardSize; i++) {
+		std::vector<char> Xrow;
+		for (int j = 0; j < boardSize; j++) {
+			Xrow.push_back(tilesVector.at(i).at(j).getState());
+		}
+		charBoard.push_back(Xrow);
+	}
+
+	return charBoard;
+}
+
 void Board::setupBoard()
 {
 	int initposX = (GAME_WIDTH / 2) - (32 * boardSize / 2);

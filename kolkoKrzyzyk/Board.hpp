@@ -3,6 +3,7 @@
 #include "MainGame.hpp"
 #include <vector>
 #include "tile.hpp"
+#include <iostream>
 
 class Board
 {
@@ -11,6 +12,7 @@ public:
 	void drawTiles();
 	void handleInput(bool *xTurn, sf::Event *ev);
 	void update(char *isWin);
+	std::vector<std::vector<char>> getBoardTileStates();
 private:
 	GameDataPtr data;
 	std::vector<std::vector<tile>> tilesVector;

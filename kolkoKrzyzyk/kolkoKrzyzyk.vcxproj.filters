@@ -75,7 +75,7 @@
     <ClCompile Include="PlayBotState.cpp">
       <Filter>Source Files\kolkoKrzyzyk</Filter>
     </ClCompile>
-    <ClCompile Include="AIbot.cpp">
+    <ClCompile Include="AI.cpp">
       <Filter>Source Files\kolkoKrzyzyk</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,7 +125,7 @@
     <ClInclude Include="PlayBotState.hpp">
       <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
-    <ClInclude Include="AIbot.hpp">
+    <ClInclude Include="AI.hpp">
       <Filter>Header Files\kolkoKrzyzyk</Filter>
     </ClInclude>
   </ItemGroup>
