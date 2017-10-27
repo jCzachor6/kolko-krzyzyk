@@ -35,6 +35,11 @@ void Board::update(char *isWin)
 	}
 }
 
+void Board::setPoint(sf::Vector2i point, char state)
+{
+	tilesVector.at(point.x).at(point.y).setState(state);
+}
+
 std::vector<std::vector<char>> Board::getBoardTileStates()
 {
 	std::vector<std::vector<char>> charBoard;

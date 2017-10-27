@@ -12,6 +12,7 @@ public:
 	void drawTiles();
 	void handleInput(bool *xTurn, sf::Event *ev);
 	void update(char *isWin);
+	void setPoint(sf::Vector2i point, char state);
 	std::vector<std::vector<char>> getBoardTileStates();
 private:
 	GameDataPtr data;

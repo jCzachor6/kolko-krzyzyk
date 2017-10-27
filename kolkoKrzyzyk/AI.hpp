@@ -12,20 +12,26 @@ public:
 	void adjustPointsToDifficulty();
 	std::vector<sf::Vector2i> getBestPoints();
 	void drawPointsOfInterest();
+	sf::Vector2i getHighestPoint();
 
 private:
 	GameDataPtr data;
 	int difficulty;
 	std::string font;
 
-	void sortPoints();
-	void generatePoints(int size);
-	void setupTexts();
-
-	std::vector<std::vector<short>> pointsOfInterest;
-	std::vector<std::vector<sf::Text>> pointTexts;
 	bool arePointsGenerated;
 
-	std::vector<sf::Vector2i> topPoints;
+	void sortPoints();
+	void generatePoints(int size);
+
+	std::vector<std::vector<short>> pointsOfInterest;
+	void setPointsToZero();
+	void incByOneAroundXO(std::vector<std::vector<char>> *tab);
+	void setPointsToZeroOnXO(std::vector<std::vector<char>> *tab);
+
+	//draw 
+	void setupTexts();
+	void updateTexts();
+	std::vector<std::vector<sf::Text>> texts;
 };
 

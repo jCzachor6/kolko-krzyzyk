@@ -65,6 +65,7 @@ void PlayBotState::HandleInput()
 		menuButton->handleInput();
 		if (!lockInput && xTurn) {
 			board->handleInput(&xTurn, &event);
+			board->update(&isWin);
 		}
 	}
 }
@@ -85,21 +86,12 @@ void PlayBotState::Update()
 		lockInput = true;
 		break;
 	default:
-		board->update(&isWin);
 		if (xTurn) {
 			arrowSprite.setPosition(gridLayout->getPosition(4, 3));
-		}
-		else {
+		}else {
 			arrowSprite.setPosition(gridLayout->getPosition(1, 3));
-			/*
-			TODO BOT
 			bot->analyze(board->getBoardTileStates());
-			bestPoints = bot->getBestPoints();
-			int rnd = random(0 - bestPoints.size())
-			board->setPoint(bestPoints.at(rnd), 'o');
-			
-			*/
-			bot->analyze(board->getBoardTileStates());
+			board->setPoint(bot->getHighestPoint(), 'o');
 			xTurn = true;
 		}
 		break;
