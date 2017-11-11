@@ -8,7 +8,7 @@ PlayBotState::PlayBotState(GameDataPtr data, int size, int difficulty)
 	this->board_size = size;
 	this->difficulty = difficulty;
 	this->xTurn = true;
-	this->isWin = false;
+	this->isWin = 'e';
 	this->lockInput = false;
 	gridLayout = new GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
 	gridLayout->setRows(12, 36);
@@ -40,7 +40,7 @@ void PlayBotState::Init()
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
 	board = new Board(this->data, this->board_size);
-	bot = new AI(this->data, difficulty, "font");
+	bot = new AI();
 
 	menuButton = new Button(
 		this->data,
@@ -62,16 +62,15 @@ void PlayBotState::HandleInput()
 		if (sf::Event::Closed == event.type) {
 			data->renderWindow.close();
 		}
-		menuButton->handleInput();
-		if (!lockInput && xTurn) {
-			board->handleInput(&xTurn, &event);
-			board->update(&isWin);
-		}
+	}
+	menuButton->handleInput();
+	if (!lockInput && xTurn) {
+		board->handleInput(&xTurn, &event);
 	}
 }
 
 void PlayBotState::Update()
-{
+{	
 	switch (isWin) {
 	case 'x':
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
@@ -92,7 +91,10 @@ void PlayBotState::Update()
 			arrowSprite.setPosition(gridLayout->getPosition(1, 3));
 			bot->analyze(board->getBoardTileStates());
 			board->setPoint(bot->getHighestPoint(), 'o');
-			xTurn = true;
+			board->update(&isWin);
+			if (isWin == 'e') {
+				xTurn = true;
+			}else Update();
 		}
 		break;
 	}
@@ -109,7 +111,6 @@ void PlayBotState::Draw()
 	data->renderWindow.draw(crownSprite);
 	board->drawTiles();
 	menuButton->draw();
-	bot->drawPointsOfInterest();
 	data->renderWindow.display();
 }
 
@@ -121,6 +122,9 @@ void PlayBotState::Remove()
 	}
 	if (menuButton != NULL) {
 		delete menuButton;
+	}
+	if (bot != NULL) {
+		delete bot;
 	}
 	data->assetManager.RemoveTexture({
 		"Play_State_Background",
@@ -135,5 +139,8 @@ void PlayBotState::Remove()
 		"crown",
 		"menu",
 		"menusel"
+	});
+	data->assetManager.RemoveFont({
+		"font"
 	});
 }

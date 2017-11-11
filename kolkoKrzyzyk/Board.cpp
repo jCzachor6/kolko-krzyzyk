@@ -55,6 +55,11 @@ std::vector<std::vector<char>> Board::getBoardTileStates()
 	return charBoard;
 }
 
+int Board::getBoardSize()
+{
+	return this->boardSize;
+}
+
 void Board::setupBoard()
 {
 	int initposX = (GAME_WIDTH / 2) - (32 * boardSize / 2);
