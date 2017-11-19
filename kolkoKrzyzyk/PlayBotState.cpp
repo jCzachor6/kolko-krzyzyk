@@ -28,7 +28,6 @@ void PlayBotState::Init()
 	data->assetManager.LoadTexture("crown", "Resources/PlayState/crown.png");
 	data->assetManager.LoadTexture("menu", "Resources/PlayState/menu.png");
 	data->assetManager.LoadTexture("menusel", "Resources/PlayState/menusel.png");
-	data->assetManager.LoadFont("font", "Resources/Fonts/DroidSansMono-Regular.ttf");
 
 	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Play_State_Background"));
 	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
@@ -62,10 +61,8 @@ void PlayBotState::HandleInput()
 		if (sf::Event::Closed == event.type) {
 			data->renderWindow.close();
 		}
-	}
-	menuButton->handleInput();
-	if (!lockInput && xTurn) {
-		board->handleInput(&xTurn, &event);
+		menuButton->handleInput();
+		if(!lockInput && xTurn) board->handleInput(&xTurn, &event);
 	}
 }
 
@@ -91,10 +88,8 @@ void PlayBotState::Update()
 			arrowSprite.setPosition(gridLayout->getPosition(1, 3));
 			bot->analyze(board->getBoardTileStates());
 			board->setPoint(bot->getHighestPoint(), 'o');
+			xTurn = true;
 			board->update(&isWin);
-			if (isWin == 'e') {
-				xTurn = true;
-			}else Update();
 		}
 		break;
 	}
@@ -139,8 +134,5 @@ void PlayBotState::Remove()
 		"crown",
 		"menu",
 		"menusel"
-	});
-	data->assetManager.RemoveFont({
-		"font"
 	});
 }

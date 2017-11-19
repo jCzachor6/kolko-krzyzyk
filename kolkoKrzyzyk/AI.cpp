@@ -33,12 +33,6 @@ void AI::analyze(std::vector<std::vector<char>> tab)
 	setPointsToZeroOnXO(&tab);
 }
 
-
-std::vector<sf::Vector2i> AI::getBestPoints()
-{
-	return std::vector<sf::Vector2i>();
-}
-
 sf::Vector2i AI::getHighestPoint()
 {
 	int max = 0;

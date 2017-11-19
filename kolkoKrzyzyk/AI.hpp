@@ -10,7 +10,6 @@ public:
 	AI();
 
 	void analyze(std::vector<std::vector<char>> tab);
-	std::vector<sf::Vector2i> getBestPoints();
 	sf::Vector2i getHighestPoint();
 
 private:
