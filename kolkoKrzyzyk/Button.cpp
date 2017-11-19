@@ -17,7 +17,7 @@ void Button::draw()
 
 void Button::handleInput()
 {
-	if (data->inputManager.IsSpriteClicked(sprite, sf::Mouse::Button::Left, data->renderWindow)) {
+	if (data->inputManager.IsSpriteHold(sprite, sf::Mouse::Button::Left, data->renderWindow)) {
 		this->onClick();
 	}
 

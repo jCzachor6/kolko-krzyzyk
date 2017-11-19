@@ -1,15 +1,18 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "MainGame.hpp"
 #include "Board.hpp"
 #include "GridLayout.hpp"
 #include "Button.hpp"
+#include "AI.hpp"
 
-class PlayState : public State
+class PlayBotState : public State
 {
 public:
-	PlayState(GameDataPtr data, int size);
+	PlayBotState(GameDataPtr data, int size, int difficulty);
+
 	void Init();
 	void HandleInput();
 	void Update();
@@ -20,6 +23,7 @@ private:
 	GameDataPtr data;
 	int board_size;
 	sf::Sprite backgroundSprite;
+	sf::Sprite aiSprite;
 	sf::Sprite circleSprite;
 	sf::Sprite crossSprite;
 	sf::Sprite arrowSprite;
@@ -32,5 +36,8 @@ private:
 	bool xTurn;
 	char isWin;
 	bool lockInput;
+
+	int difficulty;
+	AI *bot;
 };
 

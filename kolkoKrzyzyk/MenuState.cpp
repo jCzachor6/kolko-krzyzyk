@@ -1,12 +1,12 @@
 #include "MenuState.hpp"
 #include "DEFINITIONS.hpp"
 #include "PlayState.hpp"
+#include "PlayBotState.hpp"
 #include <iostream>
 
 MenuState::MenuState(GameDataPtr data)
 {
 	this->data = data;
-	this->selectedSize = 10;
 	gridLayout = new  GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
 	gridLayout->setRows(12, 12);
 	boardSize = new Selector(this->data);
@@ -43,7 +43,7 @@ void MenuState::Init()
 		sf::Vector2i(gridLayout->getPosition(6, 7)),
 		"Menu_State_One", "Menu_State_Onesel");
 	onePlayer->setOnClick([&]() {
-		//data->stateManager.AddState(StatePtr(new PlayBotState(this->data, selectedSize)));
+		data->stateManager.AddState(StatePtr(new PlayBotState(this->data, boardSize->getReturnValue(), 100)));
 	});
 
 	exitGame = new Button(this->data,

@@ -26,7 +26,7 @@ void Selector::addSelectable(sf::Vector2f pos, int returnValue, std::string notS
 void Selector::handleInput()
 {
 	for (int i = 0; i < items.size(); i++) {
-		if (data->inputManager.IsSpriteClicked(items.at(i).sprite, sf::Mouse::Button::Left, data->renderWindow)) {
+		if (data->inputManager.IsSpriteHold(items.at(i).sprite, sf::Mouse::Button::Left, data->renderWindow)) {
 			for (int j = 0; j < items.size(); j++) {
 				if(j!=i) 
 					items.at(j).sprite.setTexture(this->data->assetManager.GetTexture(items.at(j).notSelected));

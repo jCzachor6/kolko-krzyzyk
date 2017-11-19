@@ -18,7 +18,6 @@ public:
 	void Remove();
 
 private:
-	int selectedSize;
 	GameDataPtr data;
 	sf::Sprite backgroundSprite;
 	sf::Sprite p10Sprite, p15Sprite, p20Sprite;

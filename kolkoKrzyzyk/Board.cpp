@@ -1,6 +1,5 @@
 #include "Board.hpp"
 #include "DEFINITIONS.hpp"
-#include <iostream>
 
 Board::Board(GameDataPtr data, int size)
 {
@@ -19,21 +18,47 @@ void Board::drawTiles()
 	}
 }
 
-void Board::handleInput(bool *xTurn)
+void Board::handleInput(bool *xTurn, sf::Event *ev)
 {
 	for (int i = 0; i < tilesVector.size(); i++) {
 		for (int j = 0; j < tilesVector.size(); j++) {
-			tilesVector.at(i).at(j).handleInput(xTurn, &isChecked);
+			tilesVector.at(i).at(j).handleInput(xTurn, &isChecked, ev);
 		}
 	}
 }
 
-void Board::update(bool *isWin)
+void Board::update(char *isWin)
 {
 	if (!isChecked) {
 		isChecked = true;
 		*isWin = checkIfWin();
 	}
+}
+
+void Board::setPoint(sf::Vector2i point, char state)
+{
+	tilesVector.at(point.x).at(point.y).setState(state);
+	isChecked = false;
+}
+
+std::vector<std::vector<char>> Board::getBoardTileStates()
+{
+	std::vector<std::vector<char>> charBoard;
+
+	for (int i = 0; i < boardSize; i++) {
+		std::vector<char> Xrow;
+		for (int j = 0; j < boardSize; j++) {
+			Xrow.push_back(tilesVector.at(i).at(j).getState());
+		}
+		charBoard.push_back(Xrow);
+	}
+
+	return charBoard;
+}
+
+int Board::getBoardSize()
+{
+	return this->boardSize;
 }
 
 void Board::setupBoard()
@@ -50,7 +75,7 @@ void Board::setupBoard()
 	}
 }
 
-bool Board::checkIfWin()
+char Board::checkIfWin()
 {
 	int inRowToWin = IN_ROW_TO_WIN;
 	int xRow = 0;
@@ -65,7 +90,7 @@ bool Board::checkIfWin()
 					|| goBottom(j, i, 'x')
 					|| goDiagonalLeft(j, i, 'x')
 					|| goDiagonalRight(j, i, 'x'))
-					return true;
+					return 'x';
 				break;
 			case 'o':
 				oRow++;
@@ -74,7 +99,7 @@ bool Board::checkIfWin()
 					|| goBottom(j, i, 'o')
 					|| goDiagonalLeft(j, i, 'o')
 					|| goDiagonalRight(j, i, 'o'))
-					return true;
+					return 'o';
 				break;
 			default:
 				xRow = 0;
@@ -84,7 +109,7 @@ bool Board::checkIfWin()
 
 		}
 	}
-	return false;
+	return 'e';
 }
 
 bool Board::goBottom(int x, int y, char state)

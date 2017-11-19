@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -134,12 +135,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="PlayBotState.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Selector.cpp" />
     <ClCompile Include="SplashState.cpp" />
     <ClCompile Include="tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI.hpp" />
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="Board.hpp" />
     <ClInclude Include="Button.hpp" />
@@ -149,6 +152,7 @@
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="MainGame.hpp" />
     <ClInclude Include="MenuState.hpp" />
+    <ClInclude Include="PlayBotState.hpp" />
     <ClInclude Include="PlayState.hpp" />
     <ClInclude Include="Selector.hpp" />
     <ClInclude Include="SplashState.hpp" />
