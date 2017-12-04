@@ -5,7 +5,7 @@
 PlayState::PlayState(GameDataPtr data, int size)
 {
 	this->data = data;
-	this->board_size = size;
+	this->boardSize = size;
 	this->xTurn = true;
 	this->isWin = false;
 	this->lockInput = false;
@@ -35,7 +35,7 @@ void PlayState::Init()
 	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
-	board = new Board(this->data, this->board_size);
+	board = new Board(this->data, this->boardSize);
 	menuButton = new Button(
 		this->data,
 		sf::Vector2i(gridLayout->getPosition(33, 10)),

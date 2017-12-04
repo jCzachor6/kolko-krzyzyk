@@ -43,7 +43,7 @@ void MenuState::Init()
 		sf::Vector2i(gridLayout->getPosition(6, 7)),
 		"Menu_State_One", "Menu_State_Onesel");
 	onePlayer->setOnClick([&]() {
-		data->stateManager.AddState(StatePtr(new PlayBotState(this->data, boardSize->getReturnValue(), 100)));
+		data->stateManager.AddState(StatePtr(new PlayBotState(this->data, boardSize->getReturnValue())));
 	});
 
 	exitGame = new Button(this->data,

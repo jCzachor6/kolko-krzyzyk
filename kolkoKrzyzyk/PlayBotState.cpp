@@ -2,11 +2,10 @@
 #include "DEFINITIONS.hpp"
 #include "MenuState.hpp"
 
-PlayBotState::PlayBotState(GameDataPtr data, int size, int difficulty)
+PlayBotState::PlayBotState(GameDataPtr data, int size)
 {
 	this->data = data;
-	this->board_size = size;
-	this->difficulty = difficulty;
+	this->boardSize = size;
 	this->xTurn = true;
 	this->isWin = 'e';
 	this->lockInput = false;
@@ -38,7 +37,7 @@ void PlayBotState::Init()
 	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
-	board = new Board(this->data, this->board_size);
+	board = new Board(this->data, this->boardSize);
 	bot = new AI();
 
 	menuButton = new Button(

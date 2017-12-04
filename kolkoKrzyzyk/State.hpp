@@ -6,7 +6,7 @@
  *
  * @brief	Virtual State interface with methods to override.
  *
- * @author	Jakub
+ * @author	Jakub Czachor
  * @date	04.12.2017
  */
 
