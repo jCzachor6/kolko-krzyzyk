@@ -7,11 +7,6 @@ Selector::Selector(GameDataPtr data)
 	this->data = data;
 }
 
-
-Selector::~Selector()
-{
-}
-
 void Selector::addSelectable(sf::Vector2f pos, int returnValue, std::string notSelected, std::string selected)
 {
 	Selectable item;
