@@ -4,7 +4,7 @@
 Board::Board(GameDataPtr data, int size)
 {
 	this->data = data;
-	this->boardSize = size;
+	this->boardSizeY = size;
 	this->isChecked = true;
 	setupBoard();
 }
@@ -45,9 +45,9 @@ std::vector<std::vector<char>> Board::getBoardTileStates()
 {
 	std::vector<std::vector<char>> charBoard;
 
-	for (int i = 0; i < boardSize; i++) {
+	for (int i = 0; i < boardSizeY; i++) {
 		std::vector<char> Xrow;
-		for (int j = 0; j < boardSize; j++) {
+		for (int j = 0; j < boardSizeY; j++) {
 			Xrow.push_back(tilesVector.at(i).at(j).getState());
 		}
 		charBoard.push_back(Xrow);
@@ -58,16 +58,16 @@ std::vector<std::vector<char>> Board::getBoardTileStates()
 
 int Board::getBoardSize()
 {
-	return this->boardSize;
+	return this->boardSizeY;
 }
 
 void Board::setupBoard()
 {
-	int initposX = (GAME_WIDTH / 2) - (32 * boardSize / 2);
-	int initposY = (GAME_HEIGHT / 2) - (32 * boardSize / 2);
-	for (int i = 0; i < boardSize; i++) {
+	int initposX = 224;
+	int initposY = 0;
+	for (int i = 0; i < boardSizeY; i++) {
 		std::vector<tile> Xrow;
-		for (int j = 0; j < boardSize; j++) {
+		for (int j = 0; j < boardSizeY; j++) {
 			tile tmpTile(this->data, initposX + 32 * j, initposY + 32 * i);
 			Xrow.push_back(tmpTile);
 		}
@@ -115,7 +115,7 @@ char Board::checkIfWin()
 bool Board::goBottom(int x, int y, char state)
 {
 	int inRow = 0;
-	if (y <= boardSize - IN_ROW_TO_WIN) {
+	if (y <= boardSizeY - IN_ROW_TO_WIN) {
 		for (int i = 0; i < IN_ROW_TO_WIN; i++) {
 			if (tilesVector.at(y+i).at(x).getState() == state) {
 				if (++inRow == IN_ROW_TO_WIN) {
@@ -130,7 +130,7 @@ bool Board::goBottom(int x, int y, char state)
 bool Board::goDiagonalLeft(int x, int y, char state)
 {
 	int inRow = 0;
-	if (y <= boardSize - IN_ROW_TO_WIN && x >= IN_ROW_TO_WIN-1) {
+	if (y <= boardSizeY - IN_ROW_TO_WIN && x >= IN_ROW_TO_WIN-1) {
 		for (int i = 0; i < IN_ROW_TO_WIN; i++) {
 			if (tilesVector.at(y + i).at(x - i).getState() == state) {
 				if (++inRow == IN_ROW_TO_WIN) {
@@ -145,7 +145,7 @@ bool Board::goDiagonalLeft(int x, int y, char state)
 bool Board::goDiagonalRight(int x, int y, char state)
 {
 	int inRow = 0;
-	if (y <= boardSize - IN_ROW_TO_WIN && x <= boardSize - IN_ROW_TO_WIN) {
+	if (y <= boardSizeY - IN_ROW_TO_WIN && x <= boardSizeY - IN_ROW_TO_WIN) {
 		for (int i = 0; i < IN_ROW_TO_WIN; i++) {
 			if (tilesVector.at(y + i).at(x + i).getState() == state) {
 				if (++inRow == IN_ROW_TO_WIN) {

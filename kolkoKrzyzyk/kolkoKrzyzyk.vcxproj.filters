@@ -78,6 +78,9 @@
     <ClCompile Include="AI.cpp">
       <Filter>Source Files\kolkoKrzyzyk</Filter>
     </ClCompile>
+    <ClCompile Include="Spinner.cpp">
+      <Filter>Source Files\engine\items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.hpp">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="AI.hpp">
       <Filter>Header Files\kolkoKrzyzyk</Filter>
+    </ClInclude>
+    <ClInclude Include="Spinner.hpp">
+      <Filter>Header Files\engine\items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

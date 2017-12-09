@@ -98,7 +98,7 @@ private:
 	/** @brief	The tiles squared vector */
 	std::vector<std::vector<tile>> tilesVector;
 	/** @brief	Size of the board */
-	int boardSize;
+	int boardSizeY;
 
 	/**
 	 * @fn	void Board::setupBoard();

@@ -2,10 +2,14 @@
 #include "DEFINITIONS.hpp"
 #include "MenuState.hpp"
 
-PlayBotState::PlayBotState(GameDataPtr data, int size)
+PlayBotState::PlayBotState(GameDataPtr data, int sizeX, int sizeY)
 {
 	this->data = data;
-	this->boardSize = size;
+	this->data->renderWindow.setSize(sf::Vector2u(224 + sizeX * 32, sizeY * 32));
+	sf::View mGUIView = sf::View(sf::FloatRect(0.f, 0.f, 224 + sizeX * 32, sizeY * 32));
+	this->data->renderWindow.setView(mGUIView);
+	this->boardSizeY = sizeY;
+	this->boardSizeX = sizeX;
 	this->xTurn = true;
 	this->isWin = 'e';
 	this->lockInput = false;
@@ -28,29 +32,25 @@ void PlayBotState::Init()
 	data->assetManager.LoadTexture("menu", "Resources/PlayState/menu.png");
 	data->assetManager.LoadTexture("menusel", "Resources/PlayState/menusel.png");
 
-	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Play_State_Background"));
-	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
-	backgroundSprite.setScale(newScale);
-
 	aiSprite.setTexture(this->data->assetManager.GetTexture("ai"));
 	circleSprite.setTexture(this->data->assetManager.GetTexture("O"));
 	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
-	board = new Board(this->data, this->boardSize);
+	board = new Board(this->data, this->boardSizeY);
 	bot = new AI();
 
 	menuButton = new Button(
 		this->data,
-		sf::Vector2i(gridLayout->getPosition(33, 10)),
+		sf::Vector2i(gridLayout->getPosition(3,3)),
 		"menu", "menusel");
 	menuButton->setOnClick([&]() {
 		data->stateManager.AddState(StatePtr(new MenuState(this->data)));
 	});
 
-	aiSprite.setPosition(gridLayout->getPosition(1, 2));
-	circleSprite.setPosition(gridLayout->getPosition(1, 2));
-	crossSprite.setPosition(gridLayout->getPosition(4, 2));
+	aiSprite.setPosition(gridLayout->getPosition(1, 1));
+	circleSprite.setPosition(gridLayout->getPosition(1, 1));
+	crossSprite.setPosition(gridLayout->getPosition(4, 1));
 }
 
 void PlayBotState::HandleInput()
@@ -70,21 +70,21 @@ void PlayBotState::Update()
 	switch (isWin) {
 	case 'x':
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
-		crownSprite.setPosition(gridLayout->getPosition(4, 1));
-		arrowSprite.setPosition(gridLayout->getPosition(4, 3));
+		crownSprite.setPosition(gridLayout->getPosition(4, 0));
+		arrowSprite.setPosition(gridLayout->getPosition(4, 2));
 		lockInput = true;
 		break;
 	case 'o':
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
-		crownSprite.setPosition(gridLayout->getPosition(1, 1));
-		arrowSprite.setPosition(gridLayout->getPosition(1, 3));
+		crownSprite.setPosition(gridLayout->getPosition(1, 0));
+		arrowSprite.setPosition(gridLayout->getPosition(1, 2));
 		lockInput = true;
 		break;
 	default:
 		if (xTurn) {
-			arrowSprite.setPosition(gridLayout->getPosition(4, 3));
+			arrowSprite.setPosition(gridLayout->getPosition(4, 2));
 		}else {
-			arrowSprite.setPosition(gridLayout->getPosition(1, 3));
+			arrowSprite.setPosition(gridLayout->getPosition(1, 2));
 			bot->analyze(board->getBoardTileStates());
 			board->setPoint(bot->getHighestPoint(), 'o');
 			xTurn = true;
@@ -97,7 +97,6 @@ void PlayBotState::Update()
 void PlayBotState::Draw()
 {
 	data->renderWindow.clear();
-	data->renderWindow.draw(backgroundSprite);
 	data->renderWindow.draw(circleSprite);
 	data->renderWindow.draw(aiSprite);
 	data->renderWindow.draw(crossSprite);

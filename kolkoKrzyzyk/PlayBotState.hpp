@@ -30,7 +30,7 @@ public:
 	 * @param	size	The size of the board.
 	 */
 
-	PlayBotState(GameDataPtr data, int size);
+	PlayBotState(GameDataPtr data, int sizeX, int sizeY);
 
 	/**
 	 * @fn	void PlayBotState::Init();
@@ -75,8 +75,10 @@ public:
 private:
 	/** @brief	The game data */
 	GameDataPtr data;
-	/** @brief	Size of the board */
-	int boardSize;
+	/** @brief	Y Size of the board */
+	int boardSizeY;
+	/** @brief	X Size of the board */
+	int boardSizeX;
 	/** @brief	The background sprite */
 	sf::Sprite backgroundSprite;
 	/** @brief	The ai sprite */

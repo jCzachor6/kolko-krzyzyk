@@ -4,12 +4,15 @@
 #include "PlayBotState.hpp"
 #include <iostream>
 
+
 MenuState::MenuState(GameDataPtr data)
 {
 	this->data = data;
+	this->data->renderWindow.setSize(sf::Vector2u(GAME_WIDTH, GAME_HEIGHT));
+	sf::View mGUIView = sf::View(sf::FloatRect(0.f, 0.f, GAME_WIDTH, GAME_HEIGHT));
+	this->data->renderWindow.setView(mGUIView);
 	gridLayout = new  GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
 	gridLayout->setRows(12, 12);
-	boardSize = new Selector(this->data);
 }
 
 void MenuState::Init()
@@ -21,29 +24,34 @@ void MenuState::Init()
 	data->assetManager.LoadTexture("Menu_State_Twosel", "Resources/MenuState/dwoch_sel.png");
 	data->assetManager.LoadTexture("Menu_State_Onesel", "Resources/MenuState/jeden_sel.png");
 	data->assetManager.LoadTexture("Menu_State_Exitsel", "Resources/MenuState/wyjscie_sel.png");
-	data->assetManager.LoadTexture("Menu_State_10", "Resources/MenuState/10.png");
-	data->assetManager.LoadTexture("Menu_State_15", "Resources/MenuState/15.png");
-	data->assetManager.LoadTexture("Menu_State_20", "Resources/MenuState/20.png");
-	data->assetManager.LoadTexture("Menu_State_10sel", "Resources/MenuState/10_sel.png");
-	data->assetManager.LoadTexture("Menu_State_15sel", "Resources/MenuState/15_sel.png");
-	data->assetManager.LoadTexture("Menu_State_20sel", "Resources/MenuState/20_sel.png");
+	data->assetManager.LoadTexture("Menu_State_spinner", "Resources/MenuState/spinner.png");
+	data->assetManager.LoadTexture("Menu_State_spinnersel", "Resources/MenuState/spinner_sel.png");
+	data->assetManager.LoadFont("font", "Resources/Fonts/DroidSansMono-Regular.ttf");
 
 	backgroundSprite.setTexture(this->data->assetManager.GetTexture("Menu_State_Background"));
 	sf::Vector2f newScale(GAME_WIDTH / backgroundSprite.getGlobalBounds().width, GAME_HEIGHT / backgroundSprite.getLocalBounds().height);
 	backgroundSprite.setScale(newScale);
 
+	
+	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
+	int maxHeight = (mode.height - 64) / 32;
+	int maxWidth =  (mode.width - 224 - 64) / 32;
+
+	boardSizeY = new Spinner(this->data, gridLayout->getPosition(5, 3), "Menu_State_spinner", "Menu_State_spinnersel", "font", 10, maxHeight);
+	boardSizeX = new Spinner(this->data, gridLayout->getPosition(7, 3), "Menu_State_spinner", "Menu_State_spinnersel", "font", 10, maxWidth);
+
 	twoPlayers = new Button(this->data,
 		sf::Vector2i(gridLayout->getPosition(6, 5)),
 		"Menu_State_Two", "Menu_State_Twosel");
 	twoPlayers->setOnClick([&]() {
-		data->stateManager.AddState(StatePtr(new PlayState(this->data, boardSize->getReturnValue())));
+		data->stateManager.AddState(StatePtr(new PlayState(this->data, boardSizeX->getValue(), boardSizeY->getValue())));
 	});
 	
 	onePlayer = new Button(this->data,
 		sf::Vector2i(gridLayout->getPosition(6, 7)),
 		"Menu_State_One", "Menu_State_Onesel");
 	onePlayer->setOnClick([&]() {
-		data->stateManager.AddState(StatePtr(new PlayBotState(this->data, boardSize->getReturnValue())));
+		data->stateManager.AddState(StatePtr(new PlayBotState(this->data, boardSizeX->getValue(), boardSizeY->getValue())));
 	});
 
 	exitGame = new Button(this->data,
@@ -52,11 +60,8 @@ void MenuState::Init()
 	exitGame->setOnClick([&]() {
 		data->renderWindow.close();
 	});
-	
-	boardSize->addSelectable(gridLayout->getPosition(4, 3), 10, "Menu_State_10", "Menu_State_10sel");
-	boardSize->addSelectable(gridLayout->getPosition(6, 3), 15, "Menu_State_15", "Menu_State_15sel");
-	boardSize->addSelectable(gridLayout->getPosition(8, 3), 20, "Menu_State_20", "Menu_State_20sel");
-	boardSize->setDefault();
+
+
 }
 
 void MenuState::HandleInput()
@@ -71,7 +76,8 @@ void MenuState::HandleInput()
 		twoPlayers->handleInput();
 		onePlayer->handleInput();
 		exitGame->handleInput();
-		boardSize->handleInput();
+		boardSizeY->handleInput(&event);
+		boardSizeX->handleInput(&event);
 	}
 }
 
@@ -83,7 +89,8 @@ void MenuState::Draw()
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
-	boardSize->draw();
+	boardSizeY->draw();
+	boardSizeX->draw();
 	twoPlayers->draw();
 	onePlayer->draw();
 	exitGame->draw();
@@ -93,7 +100,12 @@ void MenuState::Draw()
 void MenuState::Remove()
 {
 	delete gridLayout;
-	delete boardSize;
+	if (boardSizeX != NULL) {
+		delete boardSizeX;
+	}
+	if (boardSizeY != NULL) {
+		delete boardSizeY;
+	}
 	if (twoPlayers != NULL) {
 		delete twoPlayers;
 	}
@@ -111,12 +123,11 @@ void MenuState::Remove()
 		"Menu_State_Twosel" , 
 		"Menu_State_Onesel", 
 		"Menu_State_Exitsel",
-		"Menu_State_10" , 
-		"Menu_State_15", 
-		"Menu_State_20", 
-		"Menu_State_10sel" , 
-		"Menu_State_15sel", 
-		"Menu_State_20sel"
+		"Menu_State_spinner",
+		"Menu_State_spinnersel"
+	});
+	data->assetManager.RemoveFont({
+		"font"
 	});
 }
 

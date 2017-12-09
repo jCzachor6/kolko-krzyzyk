@@ -20,15 +20,16 @@ class PlayState : public State
 public:
 
 	/**
-	 * @fn	PlayState::PlayState(GameDataPtr data, int size);
+	 * @fn	PlayState::PlayState(GameDataPtr data, int sizeX, int sizeY);
 	 *
 	 * @brief	Constructor
 	 *
-	 * @param	data	The game data.
-	 * @param	size	The board size.
+	 * @param	data 	The game data.
+	 * @param	sizeX	The size x of board.
+	 * @param	sizeY	The size y of board.
 	 */
 
-	PlayState(GameDataPtr data, int size);
+	PlayState(GameDataPtr data, int sizeX, int sizeY);
 
 	/**
 	 * @fn	void PlayState::Init();
@@ -73,8 +74,10 @@ public:
 private:
 	/** @brief	The game data */
 	GameDataPtr data;
-	/** @brief	Size of the board */
-	int boardSize;
+	/** @brief	Y Size of the board */
+	int boardSizeY;
+	/** @brief	X Size of the board */
+	int boardSizeX;
 	/** @brief	The background sprite */
 	sf::Sprite backgroundSprite;
 	/** @brief	The circle sprite */
