@@ -75,10 +75,10 @@ void AI::incHorizontaly(std::vector<std::vector<char>>* tab, int x, int y)
 	int xCounter = 0;
 	int i = y;
 	try {
-		for (i; tab->at(x).at(i) == 'x'; i++) {
+		for (; tab->at(x).at(i) == 'x'; i++) {
 			xCounter++;
 		}
-		for (xCounter; xCounter>0; xCounter--) {
+		for (; xCounter>0; xCounter--) {
 			if (tab->at(x).at(i) == 'o') break;
 			pointsOfInterest.at(x).at(i) += xCounter;
 			i++;
@@ -89,10 +89,10 @@ void AI::incHorizontaly(std::vector<std::vector<char>>* tab, int x, int y)
 	int oCounter = 0;
 	i = y;
 	try {
-		for (i; tab->at(x).at(i) == 'o'; i++) {
+		for (; tab->at(x).at(i) == 'o'; i++) {
 			oCounter++;
 		}
-		for (oCounter; oCounter>0; oCounter--) {
+		for (; oCounter>0; oCounter--) {
 			if (tab->at(x).at(i) == 'x') break;
 			pointsOfInterest.at(x).at(i) += oCounter;
 			i++;
@@ -106,10 +106,10 @@ void AI::incVerticaly(std::vector<std::vector<char>>* tab, int x, int y)
 	int xCounter = 0;
 	int i = x;
 	try {
-		for (i; tab->at(i).at(y) == 'x'; i++) {
+		for (; tab->at(i).at(y) == 'x'; i++) {
 			xCounter++;
 		}
-		for (xCounter; xCounter>0; xCounter--) {
+		for (; xCounter>0; xCounter--) {
 			if (tab->at(i).at(y) == 'o') break;
 			pointsOfInterest.at(i).at(y) += xCounter;
 			i++;	
@@ -119,10 +119,10 @@ void AI::incVerticaly(std::vector<std::vector<char>>* tab, int x, int y)
 	int oCounter = 0;
 	i = x;
 	try {
-		for (i; tab->at(i).at(y) == 'o'; i++) {
+		for (; tab->at(i).at(y) == 'o'; i++) {
 			oCounter++;
 		}
-		for (oCounter; oCounter>0; oCounter--) {
+		for (; oCounter>0; oCounter--) {
 			if (tab->at(i).at(y) == 'x') break;
 			pointsOfInterest.at(i).at(y) += oCounter;
 			i++;
@@ -136,10 +136,10 @@ void AI::incDiagonalLeft(std::vector<std::vector<char>>* tab, int x, int y)
 	int i = x;
 	int j = y;
 	try {
-		for (i, j; tab->at(i).at(j) == 'x'; i++, j--) {
+		for (; tab->at(i).at(j) == 'x'; i++, j--) {
 			xCounter++;
 		}
-		for (xCounter; xCounter>0; xCounter--) {
+		for (; xCounter>0; xCounter--) {
 			if (tab->at(i).at(j) == 'o') break;
 			pointsOfInterest.at(i).at(j) += xCounter;
 			i++;
@@ -152,10 +152,10 @@ void AI::incDiagonalLeft(std::vector<std::vector<char>>* tab, int x, int y)
 	i = x;
 	j = y;
 	try {
-		for (i, j; tab->at(i).at(j) == 'o'; i++, j--) {
+		for (; tab->at(i).at(j) == 'o'; i++, j--) {
 			oCounter++;
 		}
-		for (oCounter; oCounter>0; oCounter--) {
+		for (; oCounter>0; oCounter--) {
 			if (tab->at(i).at(j) == 'x') break;
 			pointsOfInterest.at(i).at(j) += oCounter;
 			i++;
@@ -171,10 +171,10 @@ void AI::incDiagonalRight(std::vector<std::vector<char>>* tab, int x, int y)
 	int i = x;
 	int j = y;
 	try {
-		for (i, j; tab->at(i).at(j) == 'x'; i++, j++) {
+		for (; tab->at(i).at(j) == 'x'; i++, j++) {
 			xCounter++;
 		}
-		for (xCounter; xCounter>0; xCounter--) {
+		for (; xCounter>0; xCounter--) {
 			if (tab->at(i).at(j) == 'o') break;
 			pointsOfInterest.at(i).at(j) += xCounter;
 			i++;
@@ -187,10 +187,10 @@ void AI::incDiagonalRight(std::vector<std::vector<char>>* tab, int x, int y)
 	i = x;
 	j = y;
 	try {
-		for (i, j; tab->at(i).at(j) == 'o'; i++, j++) {
+		for (; tab->at(i).at(j) == 'o'; i++, j++) {
 			oCounter++;
 		}
-		for (oCounter; oCounter>0; oCounter--) {
+		for (; oCounter>0; oCounter--) {
 			if (tab->at(i).at(j) == 'x') break;
 			pointsOfInterest.at(i).at(j) += oCounter;
 			i++;
@@ -205,10 +205,10 @@ void AI::incHorizontalyBackwards(std::vector<std::vector<char>>* tab, int x, int
 	int xCounter = 0;
 	int i = y;
 	try {
-		for (i; tab->at(x).at(i) == 'x'; i--) {
+		for (; tab->at(x).at(i) == 'x'; i--) {
 			xCounter++;
 		}
-		for (xCounter; xCounter>0; xCounter--) {
+		for (; xCounter>0; xCounter--) {
 			if (tab->at(x).at(i) == 'o') break;
 			pointsOfInterest.at(x).at(i) += xCounter;
 			i--;
@@ -219,10 +219,10 @@ void AI::incHorizontalyBackwards(std::vector<std::vector<char>>* tab, int x, int
 	int oCounter = 0;
 	i = y;
 	try {
-		for (i; tab->at(x).at(i) == 'o'; i--) {
+		for (; tab->at(x).at(i) == 'o'; i--) {
 			oCounter++;
 		}
-		for (oCounter; oCounter>0; oCounter--) {
+		for (; oCounter>0; oCounter--) {
 			if (tab->at(x).at(i) == 'x') break;
 			pointsOfInterest.at(x).at(i) += oCounter;
 			i--;
@@ -236,10 +236,10 @@ void AI::incVerticalyBackwards(std::vector<std::vector<char>>* tab, int x, int y
 	int xCounter = 0;
 	int i = x;
 	try {
-		for (i; tab->at(i).at(y) == 'x'; i--) {
+		for (; tab->at(i).at(y) == 'x'; i--) {
 			xCounter++;
 		}
-		for (xCounter; xCounter>0; xCounter--) {
+		for (; xCounter>0; xCounter--) {
 			if (tab->at(i).at(y) == 'o') break;
 			pointsOfInterest.at(i).at(y) += xCounter;
 			i--;
@@ -250,10 +250,10 @@ void AI::incVerticalyBackwards(std::vector<std::vector<char>>* tab, int x, int y
 	int oCounter = 0;
 	i = x;
 	try {
-		for (i; tab->at(i).at(y) == 'o'; i--) {
+		for (; tab->at(i).at(y) == 'o'; i--) {
 			oCounter++;
 		}
-		for (oCounter; oCounter>0; oCounter--) {
+		for (; oCounter>0; oCounter--) {
 			if (tab->at(i).at(y) == 'x') break;
 			pointsOfInterest.at(i).at(y) += oCounter;
 			i--;
@@ -268,10 +268,10 @@ void AI::incDiagonalLeftBackwards(std::vector<std::vector<char>>* tab, int x, in
 	int i = x;
 	int j = y;
 	try {
-		for (i, j; tab->at(i).at(j) == 'x'; i--, j++) {
+		for (; tab->at(i).at(j) == 'x'; i--, j++) {
 			xCounter++;
 		}
-		for (xCounter; xCounter>0; xCounter--) {
+		for (; xCounter>0; xCounter--) {
 			if (tab->at(i).at(j) == 'o') break;
 			pointsOfInterest.at(i).at(j) += xCounter;
 			i--;
@@ -284,10 +284,10 @@ void AI::incDiagonalLeftBackwards(std::vector<std::vector<char>>* tab, int x, in
 	i = x;
 	j = y;
 	try {
-		for (i, j; tab->at(i).at(j) == 'o'; i--, j++) {
+		for (; tab->at(i).at(j) == 'o'; i--, j++) {
 			oCounter++;
 		}
-		for (oCounter; oCounter>0; oCounter--) {
+		for (; oCounter>0; oCounter--) {
 			if (tab->at(i).at(j) == 'x') break;
 			pointsOfInterest.at(i).at(j) += oCounter;
 			i--;
@@ -303,10 +303,10 @@ void AI::incDiagonalRightBackwards(std::vector<std::vector<char>>* tab, int x, i
 	int i = x;
 	int j = y;
 	try {
-		for (i, j; tab->at(i).at(j) == 'x'; i--, j--) {
+		for (; tab->at(i).at(j) == 'x'; i--, j--) {
 			xCounter++;
 		}
-		for (xCounter; xCounter>0; xCounter--) {
+		for (; xCounter>0; xCounter--) {
 			if (tab->at(i).at(j) == 'o') break;
 			pointsOfInterest.at(i).at(j) += xCounter;
 			i--;
@@ -319,10 +319,10 @@ void AI::incDiagonalRightBackwards(std::vector<std::vector<char>>* tab, int x, i
 	i = x;
 	j = y;
 	try {
-		for (i, j; tab->at(i).at(j) == 'o'; i--, j--) {
+		for (; tab->at(i).at(j) == 'o'; i--, j--) {
 			oCounter++;
 		}
-		for (oCounter; oCounter>0; oCounter--) {
+		for (; oCounter>0; oCounter--) {
 			if (tab->at(i).at(j) == 'x') break;
 			pointsOfInterest.at(i).at(j) += oCounter;
 			i--;

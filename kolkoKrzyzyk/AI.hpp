@@ -4,12 +4,40 @@
 #include "MainGame.hpp"
 #include "Board.hpp"
 
+/**
+ * @class	AI
+ *
+ * @brief	In game AI
+ * 				 
+ * @author	Jakub Czachor
+ * @date	04.12.2017
+ */
+
 class AI
 {
 public:
 	AI();
 
+	/**
+	 * @fn	void AI::analyze(std::vector<std::vector<char>> tab);
+	 *
+	 * @brief	Analyzes the given squared array of char
+	 * 			'e' - empty
+	 * 			'x' - x placed
+	 *			'y' - y placed
+	 * @param	squared array of char
+	 */
+
 	void analyze(std::vector<std::vector<char>> tab);
+
+	/**
+	 * @fn	sf::Vector2i AI::getHighestPoint();
+	 *
+	 * @brief	Gets position of highest point from pointsOfInterest array
+	 *
+	 * @return	The highest point.
+	 */
+
 	sf::Vector2i getHighestPoint();
 
 private:
