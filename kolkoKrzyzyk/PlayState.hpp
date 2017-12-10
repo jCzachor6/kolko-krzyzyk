@@ -89,8 +89,6 @@ private:
 	/** @brief	The crown sprite */
 	sf::Sprite crownSprite;
 
-	/** @brief	The grid layout */
-	GridLayout *gridLayout;
 	/** @brief	The game board */
 	Board *board;
 	/** @brief	The menu button, goes to Main Manu on click */

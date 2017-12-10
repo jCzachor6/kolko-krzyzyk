@@ -54,6 +54,7 @@ void Spinner::handleInput(sf::Event *ev)
 		if (ev->type == sf::Event::MouseWheelMoved && ev->mouseWheel.delta <0)
 		{
 			value += ev->mouseWheel.delta;
+			if (this->value < this->minValue) value = minValue;
 			textValue.setString(std::to_string(value));
 		}
 	}
@@ -65,15 +66,13 @@ void Spinner::handleInput(sf::Event *ev)
 		if (ev->type == sf::Event::MouseWheelMoved && ev->mouseWheel.delta >0)
 		{
 			value += ev->mouseWheel.delta;
+			if (this->value > this->maxValue) value = maxValue;
 			textValue.setString(std::to_string(value));
 		}
 	}
 	else {
 		spriteTop.setTexture(this->data->assetManager.GetTexture(notSelected));
 	}
-
-
-
 }
 
 int Spinner::getValue()

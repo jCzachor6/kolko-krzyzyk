@@ -5,17 +5,14 @@
 PlayState::PlayState(GameDataPtr data, int sizeX, int sizeY)
 {
 	this->data = data;
-	this->data->renderWindow.setSize(sf::Vector2u(224 + sizeX * 32, sizeY * 32));
-	sf::View mGUIView = sf::View(sf::FloatRect(0.f, 0.f, 224 + sizeX * 32, sizeY * 32));
+	this->data->renderWindow.setSize(sf::Vector2u(160 + sizeX * 32, sizeY * 32));
+	sf::View mGUIView = sf::View(sf::FloatRect(0.f, 0.f, 160 + sizeX * 32, sizeY * 32));
 	this->data->renderWindow.setView(mGUIView);
 	this->boardSizeY = sizeY;
 	this->boardSizeX = sizeX;
 	this->xTurn = true;
 	this->isWin = false;
 	this->lockInput = false;
-	gridLayout = new GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
-	gridLayout->setRows(12, 36);
-
 }
 
 void PlayState::Init()
@@ -36,17 +33,17 @@ void PlayState::Init()
 	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
-	board = new Board(this->data, this->boardSizeY);
+	board = new Board(this->data, this->boardSizeX, this->boardSizeY);
 	menuButton = new Button(
 		this->data,
-		sf::Vector2i(gridLayout->getPosition(3, 3)),
+		sf::Vector2i(64, boardSizeY * 32 - 64),
 		"menu", "menusel");
 	menuButton->setOnClick([&]() {
 		data->stateManager.AddState(StatePtr(new MenuState(this->data)));
 	});
 
-	circleSprite.setPosition(gridLayout->getPosition(1, 1));
-	crossSprite.setPosition(gridLayout->getPosition(4, 1));
+	circleSprite.setPosition(0, 64);
+	crossSprite.setPosition(64, 64);
 }
 
 void PlayState::HandleInput()
@@ -66,22 +63,22 @@ void PlayState::Update()
 	switch (isWin) {
 	case 'x':
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
-		crownSprite.setPosition(gridLayout->getPosition(4, 0));
-		arrowSprite.setPosition(gridLayout->getPosition(4, 2));
+		crownSprite.setPosition(64, 0);
+		arrowSprite.setPosition(64, 128);
 		lockInput = true;
 		break;
 	case 'o':
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
-		crownSprite.setPosition(gridLayout->getPosition(1, 0));
-		arrowSprite.setPosition(gridLayout->getPosition(1, 2));
+		crownSprite.setPosition(0, 0);
+		arrowSprite.setPosition(0, 128);
 		lockInput = true;
 		break;
 	default: 
 		board->update(&isWin);
 		if (xTurn) {
-			arrowSprite.setPosition(gridLayout->getPosition(4, 2));
+			arrowSprite.setPosition(64, 128);
 		}else {
-			arrowSprite.setPosition(gridLayout->getPosition(1, 2));
+			arrowSprite.setPosition(0, 128);
 		}
 		break;
 	}
@@ -101,7 +98,6 @@ void PlayState::Draw()
 
 void PlayState::Remove()
 {
-	delete gridLayout;
 	if (board != NULL) {
 		delete board;
 	}

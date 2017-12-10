@@ -27,7 +27,7 @@ public:
 	 * @param	size	The size of the board.
 	 */
 
-	Board(GameDataPtr data, int size);
+	Board(GameDataPtr data, int sizeX, int sizeY);
 
 	/**
 	 * @fn	void Board::drawTiles();
@@ -97,7 +97,9 @@ private:
 	GameDataPtr data;
 	/** @brief	The tiles squared vector */
 	std::vector<std::vector<tile>> tilesVector;
-	/** @brief	Size of the board */
+	/** @brief	X Size of the board */
+	int boardSizeX;
+	/** @brief	Y Size of the board */
 	int boardSizeY;
 
 	/**

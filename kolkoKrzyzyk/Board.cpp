@@ -1,10 +1,11 @@
 #include "Board.hpp"
 #include "DEFINITIONS.hpp"
 
-Board::Board(GameDataPtr data, int size)
+Board::Board(GameDataPtr data, int sizeX, int sizeY)
 {
 	this->data = data;
-	this->boardSizeY = size;
+	this->boardSizeX = sizeX;
+	this->boardSizeY = sizeY;
 	this->isChecked = true;
 	setupBoard();
 }
@@ -12,7 +13,7 @@ Board::Board(GameDataPtr data, int size)
 void Board::drawTiles()
 {
 	for (int i = 0; i < tilesVector.size(); i++) {
-		for (int j = 0; j < tilesVector.size(); j++) {
+		for (int j = 0; j < tilesVector.at(i).size(); j++) {
 			tilesVector.at(i).at(j).drawTile();
 		}
 	}
@@ -21,7 +22,7 @@ void Board::drawTiles()
 void Board::handleInput(bool *xTurn, sf::Event *ev)
 {
 	for (int i = 0; i < tilesVector.size(); i++) {
-		for (int j = 0; j < tilesVector.size(); j++) {
+		for (int j = 0; j < tilesVector.at(i).size(); j++) {
 			tilesVector.at(i).at(j).handleInput(xTurn, &isChecked, ev);
 		}
 	}
@@ -47,7 +48,7 @@ std::vector<std::vector<char>> Board::getBoardTileStates()
 
 	for (int i = 0; i < boardSizeY; i++) {
 		std::vector<char> Xrow;
-		for (int j = 0; j < boardSizeY; j++) {
+		for (int j = 0; j < boardSizeX; j++) {
 			Xrow.push_back(tilesVector.at(i).at(j).getState());
 		}
 		charBoard.push_back(Xrow);
@@ -63,11 +64,11 @@ int Board::getBoardSize()
 
 void Board::setupBoard()
 {
-	int initposX = 224;
+	int initposX = 160;
 	int initposY = 0;
 	for (int i = 0; i < boardSizeY; i++) {
 		std::vector<tile> Xrow;
-		for (int j = 0; j < boardSizeY; j++) {
+		for (int j = 0; j < boardSizeX; j++) {
 			tile tmpTile(this->data, initposX + 32 * j, initposY + 32 * i);
 			Xrow.push_back(tmpTile);
 		}
@@ -81,7 +82,7 @@ char Board::checkIfWin()
 	int xRow = 0;
 	int oRow = 0;
 	for (int i = 0; i < tilesVector.size(); i++) {
-		for (int j = 0; j < tilesVector.size(); j++) {
+		for (int j = 0; j < tilesVector.at(i).size(); j++) {
 			switch (tilesVector.at(i).at(j).getState()) {
 			case 'x':
 				xRow++;

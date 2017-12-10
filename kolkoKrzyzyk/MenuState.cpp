@@ -35,7 +35,7 @@ void MenuState::Init()
 	
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 	int maxHeight = (mode.height - 64) / 32;
-	int maxWidth =  (mode.width - 224 - 64) / 32;
+	int maxWidth =  (mode.width - 160 - 64) / 32;
 
 	boardSizeY = new Spinner(this->data, gridLayout->getPosition(5, 3), "Menu_State_spinner", "Menu_State_spinnersel", "font", 10, maxHeight);
 	boardSizeX = new Spinner(this->data, gridLayout->getPosition(7, 3), "Menu_State_spinner", "Menu_State_spinnersel", "font", 10, maxWidth);
