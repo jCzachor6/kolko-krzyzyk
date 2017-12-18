@@ -1,12 +1,14 @@
 #include "MainGame.hpp"
 #include "SplashState.hpp"
 #include "DEFINITIONS.hpp"
+#include <Windows.h>
 
 MainGame::MainGame(int width, int height, std::string title)
 {
-	data->renderWindow.create(sf::VideoMode(width, height), title, sf::Style::Close|sf::Style::Titlebar);
+	data->renderWindow.create(sf::VideoMode(width, height), title, sf::Style::Titlebar);
 	data->renderWindow.setFramerateLimit(FPS_LIMIT);
 	data->renderWindow.setKeyRepeatEnabled(false);
+	::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 }
 
 GameDataPtr MainGame::getData()
