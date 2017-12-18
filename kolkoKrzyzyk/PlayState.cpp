@@ -8,8 +8,8 @@ PlayState::PlayState(GameDataPtr data, int sizeX, int sizeY)
 	this->data->renderWindow.setSize(sf::Vector2u(160 + sizeX * 32, sizeY * 32));
 	sf::View mGUIView = sf::View(sf::FloatRect(0.f, 0.f, 160 + sizeX * 32, sizeY * 32));
 	this->data->renderWindow.setView(mGUIView);
-	this->boardSizeY = sizeY;
-	this->boardSizeX = sizeX;
+	this->boardHeight = sizeY;
+	this->boardWidth = sizeX;
 	this->xTurn = true;
 	this->isWin = false;
 	this->lockInput = false;
@@ -33,10 +33,10 @@ void PlayState::Init()
 	crossSprite.setTexture(this->data->assetManager.GetTexture("X"));
 	arrowSprite.setTexture(this->data->assetManager.GetTexture("arrow"));
 
-	board = new Board(this->data, this->boardSizeX, this->boardSizeY);
+	board = new Board(this->data, this->boardWidth, this->boardHeight);
 	menuButton = new Button(
 		this->data,
-		sf::Vector2i(64, boardSizeY * 32 - 64),
+		sf::Vector2i(64, boardHeight * 32 - 64),
 		"menu", "menusel");
 	menuButton->setOnClick([&]() {
 		data->stateManager.AddState(StatePtr(new MenuState(this->data)));

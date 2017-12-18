@@ -75,9 +75,9 @@ private:
 	/** @brief	The game data */
 	GameDataPtr data;
 	/** @brief	Y Size of the board */
-	int boardSizeY;
+	int boardHeight;
 	/** @brief	X Size of the board */
-	int boardSizeX;
+	int boardWidth;
 	/** @brief	The background sprite */
 	sf::Sprite backgroundSprite;
 	/** @brief	The circle sprite */

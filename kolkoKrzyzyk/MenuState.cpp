@@ -37,21 +37,21 @@ void MenuState::Init()
 	int maxHeight = (mode.height - 64) / 32;
 	int maxWidth =  (mode.width - 160 - 64) / 32;
 
-	boardSizeY = new Spinner(this->data, gridLayout->getPosition(5, 3), "Menu_State_spinner", "Menu_State_spinnersel", "font", 10, maxHeight);
-	boardSizeX = new Spinner(this->data, gridLayout->getPosition(7, 3), "Menu_State_spinner", "Menu_State_spinnersel", "font", 10, maxWidth);
+	boardHeight = new Spinner(this->data, gridLayout->getPosition(5, 3), "Menu_State_spinner", "Menu_State_spinnersel", "font", 10, maxHeight);
+	boardWidth = new Spinner(this->data, gridLayout->getPosition(7, 3), "Menu_State_spinner", "Menu_State_spinnersel", "font", 10, maxWidth);
 
 	twoPlayers = new Button(this->data,
 		sf::Vector2i(gridLayout->getPosition(6, 5)),
 		"Menu_State_Two", "Menu_State_Twosel");
 	twoPlayers->setOnClick([&]() {
-		data->stateManager.AddState(StatePtr(new PlayState(this->data, boardSizeX->getValue(), boardSizeY->getValue())));
+		data->stateManager.AddState(StatePtr(new PlayState(this->data, boardWidth->getValue(), boardHeight->getValue())));
 	});
 	
 	onePlayer = new Button(this->data,
 		sf::Vector2i(gridLayout->getPosition(6, 7)),
 		"Menu_State_One", "Menu_State_Onesel");
 	onePlayer->setOnClick([&]() {
-		data->stateManager.AddState(StatePtr(new PlayBotState(this->data, boardSizeX->getValue(), boardSizeY->getValue())));
+		data->stateManager.AddState(StatePtr(new PlayBotState(this->data, boardWidth->getValue(), boardHeight->getValue())));
 	});
 
 	exitGame = new Button(this->data,
@@ -76,8 +76,8 @@ void MenuState::HandleInput()
 		twoPlayers->handleInput();
 		onePlayer->handleInput();
 		exitGame->handleInput();
-		boardSizeY->handleInput(&event);
-		boardSizeX->handleInput(&event);
+		boardHeight->handleInput(&event);
+		boardWidth->handleInput(&event);
 	}
 }
 
@@ -89,8 +89,8 @@ void MenuState::Draw()
 {
 	data->renderWindow.clear();
 	data->renderWindow.draw(backgroundSprite);
-	boardSizeY->draw();
-	boardSizeX->draw();
+	boardHeight->draw();
+	boardWidth->draw();
 	twoPlayers->draw();
 	onePlayer->draw();
 	exitGame->draw();
@@ -100,11 +100,11 @@ void MenuState::Draw()
 void MenuState::Remove()
 {
 	delete gridLayout;
-	if (boardSizeX != NULL) {
-		delete boardSizeX;
+	if (boardWidth != NULL) {
+		delete boardWidth;
 	}
-	if (boardSizeY != NULL) {
-		delete boardSizeY;
+	if (boardHeight != NULL) {
+		delete boardHeight;
 	}
 	if (twoPlayers != NULL) {
 		delete twoPlayers;

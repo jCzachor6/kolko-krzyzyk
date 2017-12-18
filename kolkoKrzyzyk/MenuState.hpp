@@ -83,8 +83,8 @@ private:
 	/** @brief	The exit game button */
 	Button *exitGame;
 	/** @brief	Selector of the board size Y*/
-	Spinner *boardSizeY;
+	Spinner *boardHeight;
 	/** @brief	Selector of the board size X*/
-	Spinner *boardSizeX;
+	Spinner *boardWidth;
 };
 
