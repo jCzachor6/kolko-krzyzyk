@@ -65,20 +65,24 @@ void PlayState::Update()
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
 		crownSprite.setPosition(64, 0);
 		arrowSprite.setPosition(64, 128);
+		this->data->renderWindow.setTitle("******** X WYGRAL ********");
 		lockInput = true;
 		break;
 	case 'o':
 		crownSprite.setTexture(this->data->assetManager.GetTexture("crown"));
 		crownSprite.setPosition(0, 0);
 		arrowSprite.setPosition(0, 128);
+		this->data->renderWindow.setTitle("******** O WYGRAL ********");
 		lockInput = true;
 		break;
 	default: 
 		board->update(&isWin);
 		if (xTurn) {
 			arrowSprite.setPosition(64, 128);
+			this->data->renderWindow.setTitle("******** RUCH X ********");
 		}else {
 			arrowSprite.setPosition(0, 128);
+			this->data->renderWindow.setTitle("******** RUCH O ********");
 		}
 		break;
 	}

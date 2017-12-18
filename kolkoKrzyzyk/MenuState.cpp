@@ -13,6 +13,7 @@ MenuState::MenuState(GameDataPtr data)
 	this->data->renderWindow.setView(mGUIView);
 	gridLayout = new  GridLayout(0, 0, GAME_WIDTH, GAME_HEIGHT);
 	gridLayout->setRows(12, 12);
+	this->data->renderWindow.setTitle("kolkoKrzyzyk");
 }
 
 void MenuState::Init()
