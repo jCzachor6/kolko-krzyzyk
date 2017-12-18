@@ -6,7 +6,7 @@
 int main()
 {
 	MainGame game(GAME_WIDTH, GAME_HEIGHT, "kolkoKrzyzyk");
-	game.getData()->stateManager.AddState(StatePtr(new PlayBotState(game.getData(), 10, 10)));
+	game.getData()->stateManager.AddState(StatePtr(new SplashState(game.getData())));
 	game.Run();
 	return 0;
 }
