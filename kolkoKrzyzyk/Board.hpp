@@ -27,7 +27,7 @@ public:
 	 * @param	size	The size of the board.
 	 */
 
-	Board(GameDataPtr data, int size);
+	Board(GameDataPtr data, int sizeX, int sizeY);
 
 	/**
 	 * @fn	void Board::drawTiles();
@@ -80,25 +80,41 @@ public:
 	 * @return	The board tile states.
 	 */
 
-	std::vector<std::vector<char>> getBoardTileStates();
+	 /**   
+	 * @brief	The tiles squared vector   
+	 */
+	std::vector<std::vector<tile>> tilesVector;
 
 	/**
-	 * @fn	int Board::getBoardSize();
+	 * @fn	sf::Vector2i Board::getBoardSize();
 	 *
-	 * @brief	Gets board size
+	 * @brief	Gets board width and height
 	 *
 	 * @return	The board size.
 	 */
 
-	int getBoardSize();
+	sf::Vector2i getBoardSize();
+
+	/**
+	 * @fn	std::vector<std::vector<char>> Board::getBoardTileStates();
+	 *
+	 * @brief	Gets board tile states
+	 * 			'e' empty
+	 * 			'x' x
+	 * 			'y' y
+	 *
+	 * @return	The board tile states.
+	 */
+
+	std::vector<std::vector<char>> Board::getBoardTileStates();
 
 private:
 	/** @brief	The game data */
 	GameDataPtr data;
-	/** @brief	The tiles squared vector */
-	std::vector<std::vector<tile>> tilesVector;
-	/** @brief	Size of the board */
-	int boardSize;
+	/** @brief	Width of the board */
+	int boardWidth;
+	/** @brief	Height of the board */
+	int boardHeight;
 
 	/**
 	 * @fn	void Board::setupBoard();

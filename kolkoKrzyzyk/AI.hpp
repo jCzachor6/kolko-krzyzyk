@@ -3,14 +3,15 @@
 #include <SFML\Graphics.hpp>
 #include "MainGame.hpp"
 #include "Board.hpp"
+#include <math.h>
 
 /**
  * @class	AI
  *
- * @brief	In game AI
- * 				 
- * @author	Jakub Czachor
- * @date	04.12.2017
+ * @brief	An ai.
+ *
+ * @author	Jakub
+ * @date	18.12.2017
  */
 
 class AI
@@ -19,44 +20,49 @@ public:
 	AI();
 
 	/**
-	 * @fn	void AI::analyze(std::vector<std::vector<char>> tab);
+	 * @typedef	std::vector<std::vector<char>> charBoard
 	 *
-	 * @brief	Analyzes the given squared array of char
-	 * 			'e' - empty
-	 * 			'x' - x placed
-	 *			'y' - y placed
-	 * @param	squared array of char
+	 * @brief	Defines an alias representing the characters board
 	 */
 
-	void analyze(std::vector<std::vector<char>> tab);
+	typedef std::vector<std::vector<char>> charBoard;
 
 	/**
-	 * @fn	sf::Vector2i AI::getHighestPoint();
+	 * @typedef	std::vector<std::vector<double>> valBoard
 	 *
-	 * @brief	Gets position of highest point from pointsOfInterest array
-	 *
-	 * @return	The highest point.
+	 * @brief	Defines an alias representing the double var board
 	 */
 
-	sf::Vector2i getHighestPoint();
+	typedef std::vector<std::vector<double>> valBoard;
 
+	/**
+	 * @fn	sf::Vector2i AI::getNextStep(charBoard *states, char player);
+	 *
+	 * @brief	Gets the next step
+	 *
+	 * @param [in,out]	states	If non-null, the states.
+	 * @param 		  	player	The player.
+	 *
+	 * @return	The next step.
+	 */
+
+	sf::Vector2i getNextStep(charBoard *states, char player);
 private:
-	bool arePointsGenerated;
-	void generatePoints(int size);
 
-	std::vector<std::vector<short>> pointsOfInterest;
-	void resetPointsToZero();
+	/**
+	 * @fn	void AI::findLine(sf::Vector2i pos, sf::Vector2i delta, char player, valBoard *board, charBoard *mainBoard, bool isBlocking);
+	 *
+	 * @brief	Searches for the first line
+	 *
+	 * @param 		  	pos		  	The position.
+	 * @param 		  	delta	  	The delta position.
+	 * @param 		  	player	  	The player.
+	 * @param [in,out]	board	  	If non-null, the board.
+	 * @param [in,out]	mainBoard 	If non-null, the main game board.
+	 * @param 		  	isBlocking	True if this object is blocking.
+	 */
 
-	void incHorizontaly(std::vector<std::vector<char>> *tab, int x, int y);
-	void incVerticaly(std::vector<std::vector<char>> *tab, int x, int y);
-	void incDiagonalLeft(std::vector<std::vector<char>> *tab, int x, int y);
-	void incDiagonalRight(std::vector<std::vector<char>> *tab, int x, int y);
-
-	void incHorizontalyBackwards(std::vector<std::vector<char>> *tab, int x, int y);
-	void incVerticalyBackwards(std::vector<std::vector<char>> *tab, int x, int y);
-	void incDiagonalLeftBackwards(std::vector<std::vector<char>> *tab, int x, int y);
-	void incDiagonalRightBackwards(std::vector<std::vector<char>> *tab, int x, int y);
+	void findLine(sf::Vector2i pos, sf::Vector2i delta, char player, valBoard *board, charBoard *mainBoard, bool isBlocking);
 	
-	void setPointsToZeroOnXO(std::vector<std::vector<char>> *tab);
 };
 

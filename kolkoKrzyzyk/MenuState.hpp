@@ -4,7 +4,7 @@
 #include "MainGame.hpp"
 #include "Button.hpp"
 #include "GridLayout.hpp"
-#include "Selector.hpp"
+#include "Spinner.hpp"
 
 /**
  * @class	MenuState
@@ -82,7 +82,9 @@ private:
 	Button *onePlayer;
 	/** @brief	The exit game button */
 	Button *exitGame;
-	/** @brief	Selector of the board size */
-	Selector *boardSize;
+	/** @brief	Selector of the board size Y*/
+	Spinner *boardHeight;
+	/** @brief	Selector of the board size X*/
+	Spinner *boardWidth;
 };
 

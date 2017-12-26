@@ -1,10 +1,11 @@
 #include "Board.hpp"
 #include "DEFINITIONS.hpp"
 
-Board::Board(GameDataPtr data, int size)
+Board::Board(GameDataPtr data, int sizeX, int sizeY)
 {
 	this->data = data;
-	this->boardSize = size;
+	this->boardWidth = sizeX;
+	this->boardHeight = sizeY;
 	this->isChecked = true;
 	setupBoard();
 }
@@ -12,7 +13,7 @@ Board::Board(GameDataPtr data, int size)
 void Board::drawTiles()
 {
 	for (int i = 0; i < tilesVector.size(); i++) {
-		for (int j = 0; j < tilesVector.size(); j++) {
+		for (int j = 0; j < tilesVector.at(i).size(); j++) {
 			tilesVector.at(i).at(j).drawTile();
 		}
 	}
@@ -21,7 +22,7 @@ void Board::drawTiles()
 void Board::handleInput(bool *xTurn, sf::Event *ev)
 {
 	for (int i = 0; i < tilesVector.size(); i++) {
-		for (int j = 0; j < tilesVector.size(); j++) {
+		for (int j = 0; j < tilesVector.at(i).size(); j++) {
 			tilesVector.at(i).at(j).handleInput(xTurn, &isChecked, ev);
 		}
 	}
@@ -45,9 +46,9 @@ std::vector<std::vector<char>> Board::getBoardTileStates()
 {
 	std::vector<std::vector<char>> charBoard;
 
-	for (int i = 0; i < boardSize; i++) {
+	for (int i = 0; i < boardHeight; i++) {
 		std::vector<char> Xrow;
-		for (int j = 0; j < boardSize; j++) {
+		for (int j = 0; j < boardWidth; j++) {
 			Xrow.push_back(tilesVector.at(i).at(j).getState());
 		}
 		charBoard.push_back(Xrow);
@@ -56,18 +57,18 @@ std::vector<std::vector<char>> Board::getBoardTileStates()
 	return charBoard;
 }
 
-int Board::getBoardSize()
+sf::Vector2i Board::getBoardSize()
 {
-	return this->boardSize;
+	return sf::Vector2i(boardWidth, boardHeight);
 }
 
 void Board::setupBoard()
 {
-	int initposX = (GAME_WIDTH / 2) - (32 * boardSize / 2);
-	int initposY = (GAME_HEIGHT / 2) - (32 * boardSize / 2);
-	for (int i = 0; i < boardSize; i++) {
+	int initposX = 160;
+	int initposY = 0;
+	for (int i = 0; i < boardHeight; i++) {
 		std::vector<tile> Xrow;
-		for (int j = 0; j < boardSize; j++) {
+		for (int j = 0; j < boardWidth; j++) {
 			tile tmpTile(this->data, initposX + 32 * j, initposY + 32 * i);
 			Xrow.push_back(tmpTile);
 		}
@@ -81,7 +82,7 @@ char Board::checkIfWin()
 	int xRow = 0;
 	int oRow = 0;
 	for (int i = 0; i < tilesVector.size(); i++) {
-		for (int j = 0; j < tilesVector.size(); j++) {
+		for (int j = 0; j < tilesVector.at(i).size(); j++) {
 			switch (tilesVector.at(i).at(j).getState()) {
 			case 'x':
 				xRow++;
@@ -115,7 +116,7 @@ char Board::checkIfWin()
 bool Board::goBottom(int x, int y, char state)
 {
 	int inRow = 0;
-	if (y <= boardSize - IN_ROW_TO_WIN) {
+	if (y <= boardHeight - IN_ROW_TO_WIN) {
 		for (int i = 0; i < IN_ROW_TO_WIN; i++) {
 			if (tilesVector.at(y+i).at(x).getState() == state) {
 				if (++inRow == IN_ROW_TO_WIN) {
@@ -130,7 +131,7 @@ bool Board::goBottom(int x, int y, char state)
 bool Board::goDiagonalLeft(int x, int y, char state)
 {
 	int inRow = 0;
-	if (y <= boardSize - IN_ROW_TO_WIN && x >= IN_ROW_TO_WIN-1) {
+	if (y <= boardHeight - IN_ROW_TO_WIN && x >= IN_ROW_TO_WIN-1) {
 		for (int i = 0; i < IN_ROW_TO_WIN; i++) {
 			if (tilesVector.at(y + i).at(x - i).getState() == state) {
 				if (++inRow == IN_ROW_TO_WIN) {
@@ -145,7 +146,7 @@ bool Board::goDiagonalLeft(int x, int y, char state)
 bool Board::goDiagonalRight(int x, int y, char state)
 {
 	int inRow = 0;
-	if (y <= boardSize - IN_ROW_TO_WIN && x <= boardSize - IN_ROW_TO_WIN) {
+	if (y <= boardHeight - IN_ROW_TO_WIN && x <= boardHeight - IN_ROW_TO_WIN) {
 		for (int i = 0; i < IN_ROW_TO_WIN; i++) {
 			if (tilesVector.at(y + i).at(x + i).getState() == state) {
 				if (++inRow == IN_ROW_TO_WIN) {
